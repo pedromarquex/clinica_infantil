@@ -1,0 +1,129 @@
+{% extends 'core/sistema_base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block titulo %}
+	PPGB | Novo Professor
+{% endblock %}
+
+{% block content %}
+
+<div id="#content">
+
+  <ol class="breadcrumb">
+      <li><a href="{% url 'core:sistema' %}">Início</a></li>
+      <li><a href="{% url 'professor:listar_professores' %}">Professores</a></li>
+      <li class="active">Novo Professor</li>
+  </ol>    
+  <h1 id="titulo-pagina">Cadastrar Professor</h1>
+
+  {% if erro_singup %}
+    {% for erro in erro_singup %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          {{ erro }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  
+  <div style="margin-top: 20px;">
+    <form action="{% url 'professor:cadastrar' %}" method="post">
+      {% csrf_token %}
+      
+      {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
+
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="{{ form.nome.id_for_label }}">Nome</label>
+            {{ form.nome|add_class:'form-control'}}
+            {% for error in form.nome.errors %}
+              <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-5">
+            <label for="{{ form.cpf.id_for_label }}">CPF</label>
+            {{ form.cpf|add_class:'form-control'}}
+            {% for error in form.cpf.errors %}
+              <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        </div>
+                        
+        <div class="form-group col-md-3">
+          <label for="{{ form.cpf.id_for_label }}">Sexo</label>
+          {{ form.sexo|add_class:'form-control'}}
+          {% for error in form.sexo.errors %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+                      
+        <div class="form-group col-md-4">
+          <label for="{{ form.data_nascimento.id_for_label }}">Nascimento</label>
+          {{ form.data_nascimento|add_class:'form-control'}}
+          {% for error in form.data_nascimento.errors %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="{{ form.telefone.id_for_label }}">Telefone</label>
+          {{ form.telefone|add_class:'form-control'}}
+          {% for error in form.telefone.errors %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="{{ form.email.id_for_label }}">Email</label>
+          {{ form.email|add_class:'form-control'}}
+          {% for error in form.email.errors %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <label for="{{ form_user.username.id_for_label }}"> Usuário</label>
+        {{ form_user.username|add_class:'form-control' }}
+        {% for error in form_user.username.errors %}
+         <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="{{ form_user.password1.id_for_label }}">Senha</label>
+          {{ form_user.password1|add_class:'form-control'}}
+          {% for error in form_user.password1.errors %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="{{ form_user.password2.id_for_label }}">Confirmação de Senha</label>
+            {{ form_user.password2|add_class:'form-control'}}
+            {% for error in form_user.password2.errors %}
+                <span class="help-block">{{ error }}</span>
+            {% endfor %}
+         </div>
+      </div>
+      <p></p>
+
+      <div class="form-group" style="text-align: center;">
+        <button type="submit" class="btn btn-success">
+          <span class="glyphicon glyphicon-ok"></span> Cadastrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

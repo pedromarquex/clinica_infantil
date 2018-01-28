@@ -1,0 +1,109 @@
+{% extends 'core/sistema_base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block titulo %}
+	PPGB | Alunos
+{% endblock %}
+
+{% block content %}
+
+<div id="#content">
+	<ol class="breadcrumb">
+  		<li><a href="{% url 'core:sistema' %}">Início</a></li>
+  		<li class="active">Alunos</li>
+	</ol>    
+	<h1 id="titulo-pagina">Alunos</h1>
+
+	<div class="container" style="width: 100%; margin-top: 30px;">		
+  	<div class="row">
+      <form method="get">
+        <div class="well">
+          <h4 style="margin-top: 0">Filtros</h4>
+            <div class="row">
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.form.nome.id_for_label }}">Nome</label>
+                {{ filter.form.nome|add_class:'form-control'}}
+              </div>
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.form.matricula.id_for_label }}">Matrícula</label>
+                {{ filter.form.matricula|add_class:'form-control'}}
+              </div>
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.data_nascimento.nome_pai.id_for_label }}">Data de Nascimento</label>
+                {{ filter.form.data_nascimento|add_class:'form-control'}}
+              </div> 
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-search"></span> Procurar
+            </button>
+
+        </div>
+      </form>
+    </div><!-- /.row -->
+
+    {% if filter.qs.count >= 10 %}
+      <p>Mostrando 10 de {{ filter.qs.count }} resultado(s). Combine os filtros para resultados mais específicos.</p>
+    {% else %}
+      <p>Mostrando {{ filter.qs.count }} de {{ filter.qs.count }} resultado(s). Combine os filtros para resultados mais específicos.</p>
+    {% endif%}
+
+  	<table class="table table-bordered table-striped table-condensed">
+    		<thead>
+      			<tr>
+        			<th>Nome</th>
+              <th>Matrícula</th>
+              <th>Data de Nascimento</th>
+        			<th>Telefone</th>
+        			<th>Email</th>
+        			<th>Usuário</th>
+              <th>Status</th>
+      			</tr>
+   			</thead>
+    		<tbody id="myTable">
+
+    		{% for aluno in filter.qs|slice:":10" %}
+      			<tr>
+        			<td>{{aluno.nome}}</td>
+              <td>{{aluno.matricula}}</td>
+              <td>{{aluno.data_nascimento}}</td>
+        			<td>{{aluno.telefone}}</td>
+        			<td>{{aluno.email}}</td>
+        			<td>{{aluno.user}}</td>
+
+              {% if aluno.user.is_active %}
+                {% if is_professor %}
+                  <td style="color:green;">
+                    <b>Ativo</b>
+                    <a  href="{% url 'professor:validar_aluno' pk=aluno.pk %}">
+                      <i class="material-icons" style="font-size:15px;color:darkred">refresh</i>
+                    </a>
+                  </td>
+                {% else %}
+                  <td style="color:green;">
+                    Ativo
+                  </td>
+                {% endif %}
+              {% else %}
+                {% if is_professor %}
+                  <td style="color:red;">
+                    <b>Inativo</b>
+                    <a  href="{% url 'professor:validar_aluno' pk=aluno.pk %}">
+                      <i class="material-icons" style="font-size:15px;color:darkgreen">refresh</i>
+                    </a>
+                  </td>
+                {% else %}
+                  <td style="color:red;">Inativo</td>
+                {% endif %}
+              {% endif %}
+      			</tr>
+      	{% endfor %}
+
+    		</tbody>
+  		</table>
+</div>
+	
+</div>
+
+{% endblock %}

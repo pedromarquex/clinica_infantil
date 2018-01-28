@@ -1,0 +1,288 @@
+{% extends 'core/base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="tab-content" id="nav-tabContent">
+  	<div class="tab-pane fade" id="nav-sobre" role="tabpanel" aria-labelledby="nav-sobre-tab">
+  		<div class="container">
+  			<div class="row">
+    			<div class="col-sm cabecalho">
+     				<h2>O que é o PPGB?</h2>
+   				</div>
+  			</div>
+  			<div class="row">
+  				<div class="col-sm">
+					<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3500">
+  						<ol class="carousel-indicators">
+    						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  						</ol>
+  						<div class="carousel-inner">
+    						<div class="carousel-item active">
+      							<img class="d-block w-100" src="{% static "core/img/birthday.jpeg" %}" alt="First slide">
+      							<div class="carousel-caption d-none d-md-block">
+    								<h3><b>Em 2017, o PPGB fez 20 anos!</b></h3>
+  								</div>
+    						</div>
+   							<div class="carousel-item">
+      							<img class="d-block w-100" src="{% static "core/img/baby1.jpeg" %}" alt="Second slide">
+      							<div class="carousel-caption d-none d-md-block">
+    								<h3><b>+12.000 crianças atendidas</b></h3>
+  								</div>
+    						</div>
+    						<div class="carousel-item">
+      							<img class="d-block w-100" src="{% static "core/img/pregnant.jpeg" %}" alt="Third slide">
+      							<div class="carousel-caption d-none d-md-block">
+    								<h3><b>+40.000 gestantes orientadas</b></h3>
+  								</div>
+    						</div>
+  						</div>
+					</div>
+    			</div>
+    			<div class="col-sm">
+     				<p>
+     					O Programa Preventivo para Gestantes e Bebês (PPGB) é um projeto de extensão da Universidade Federal do Piauí, cujas ações são desenvolvidas no Instituto de Perinatologia Social do Piauí. </p>
+     				<p>
+     					Desde a implantação do projeto, 236 alunos do curso de Odontologia da UFPI já foram estagiários do PPGB e destes, muitos implantaram programas semelhantes em diversos municípios piauienses e em outros de estados vizinhos.
+     				</p>
+   				</div>
+  			</div>
+		</div>
+  	</div>
+  	<div class="tab-pane fade" id="nav-servicos" role="tabpanel" aria-labelledby="nav-servicos-tab">
+  		<div class="container">
+  			<div class="row">
+    			<div class="col-sm cabecalho-spam">
+     				<i class="material-icons" style="font-size:100px;color:#fc8100">alarm</i>
+     				<h3>Horários de Atendimento</h3>
+            <p></p>
+            <div class="col-sm">
+              <p id="servicos">O PPGB funciona, de forma interrupta, de segunda à sexta-feira, das 07:30 às 12:00 da manhã.</p>
+            </div>
+   				</div>
+   				<div class="col-sm cabecalho-spam">
+     				<i class="material-icons" style="font-size:100px;color:#fc8100">library_books</i>
+     				<h3>Serviços Oferecidos</h3>
+            <p></p>
+            <div class="col-sm">
+              <p id="servicos">Atendimento à bebês de 0 a 36 meses de nascimento e Teste da Linguinha.</p>
+            </div>
+   				</div>
+  			</div>
+			</div>
+  	</div>
+  	<div class="tab-pane fade" id="nav-local" role="tabpanel" aria-labelledby="nav-local-tab">	
+  		<div class="container">
+  			<div class="row">
+    			<div class="col-sm cabecalho-map-spam">
+    				<i class="material-icons" style="font-size:100px;color:#fc8100">place</i>
+     				<h3>Visite-nos!</h3>
+     				<iframe
+  						width="400px"
+  						height="300px"
+  						frameborder="0" style="border:0"
+  						src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAWjTJIuohyolEST43bX2CT0ipyPT9Ve0c&q=Instituto+de+Perinatologia+Social" allowfullscreen>
+					</iframe>
+   					</div>
+  			</div>
+		</div>
+  	</div>
+  	<div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm cabecalho-spam">
+            <i class="material-icons" style="font-size:100px;color:#fc8100"> personal_video</i>
+            <h3>Entrar no Sistema</h3>
+            <p></p>
+              {% if erro_login %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  {{ erro_login }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endif %}
+
+            <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#login" aria-expanded="false" aria-controls="collapseExample">
+                Entrar
+            </button>
+            <div class="collapse" id="login">
+              <div class="card card-body">
+                Caso esteja com problemas de acesso ao Sistema PPGB, verifique com seu Professor responsável se seu cadastro está ativo.
+                <p> </p>
+
+                    <form action="{% url 'core:login' %}" method="post">
+                      {% csrf_token %}
+                      {% for hidden in form_login.hidden_fields %}
+                        {{ hidden }}
+                      {% endfor %}
+
+                      {% for field in form_login.visible_fields %}
+                        <div class="form-group">
+                          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                          {{ field|add_class:'form-control' }}
+                          {% for error in field.errors %}
+                            <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                        </div>
+                      {% endfor %}
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-success">
+                          <span class="glyphicon glyphicon-ok"></span> Login
+                        </button>
+                      </div>
+                    </form>
+              </div>
+            </div>
+          </div>
+    			<div class="col-sm cabecalho-spam">
+     				<i class="material-icons" style="font-size:100px;color:#fc8100">person_add</i>
+     				<h3>Cadastrar-se</h3>
+            <p></p>
+
+            {% if sucesso_singup %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  {{ sucesso_singup }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+            {% endif %}
+
+            {% if erro_singup %}
+              {% for erro in erro_singup %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  {{ erro }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#singup" aria-expanded="false" aria-controls="collapseExample">
+                Cadastro
+            </button>
+
+            <div class="collapse" id="singup">
+              <div class="card card-body">
+                Você terá acesso ao Sistema PPGB assim que sua solicitação de cadastro for aceita  pelos Professores responsáveis.
+                <p> </p>
+              
+              <form action="{% url 'core:singup' %}" method="post">
+                      {% csrf_token %}
+                      {% for hidden in form_singup.hidden_fields %}
+                        {{ hidden }}
+                      {% endfor %}
+
+                      <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                          <label for="{{ form_singup.nome.id_for_label }}">Nome</label>
+                            {{ form_singup.nome|add_class:'form-control'}}
+                            {% for error in form_singup.nome.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="{{ form_singup.matricula.id_for_label }}">Matrícula</label>
+                            {{ form_singup.matricula|add_class:'form-control'}}
+                            {% for error in form_singup.matricula.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-5">
+                          <label for="{{ form_singup.cpf.id_for_label }}">CPF</label>
+                            {{ form_singup.cpf|add_class:'form-control'}}
+                            {% for error in form_singup.cpf.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group col-md-3">
+                          <label for="{{ form_singup.cpf.id_for_label }}">Sexo</label>
+                            {{ form_singup.sexo|add_class:'form-control'}}
+                            {% for error in form_singup.sexo.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                      
+                        <div class="form-group col-md-4">
+                          <label for="{{ form_singup.data_nascimento.id_for_label }}">Nascimento</label>
+                            {{ form_singup.data_nascimento|add_class:'form-control'}}
+                            {% for error in form_singup.data_nascimento.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                          <label for="{{ form_singup.telefone.id_for_label }}">Telefone</label>
+                            {{ form_singup.telefone|add_class:'form-control'}}
+                            {% for error in form_singup.telefone.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="{{ form_singup.email.id_for_label }}">Email</label>
+                            {{ form_singup.email|add_class:'form-control'}}
+                            {% for error in form_singup.email.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                      </div>
+
+                      <div class="form-group">
+                        <label for="{{ form_user.username.id_for_label }}"> Usuário</label>
+                          {{ form_user.username|add_class:'form-control' }}
+                          {% for error in form_user.username.errors %}
+                            <span class="help-block">{{ error }}</span>
+                          {% endfor %}
+                      </div>
+
+                      <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                          <label for="{{ form_user.password1.id_for_label }}">Senha</label>
+                            {{ form_user.password1|add_class:'form-control'}}
+                            {% for error in form_user.password1.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="{{ form_user.password2.id_for_label }}">Confirmação de Senha</label>
+                            {{ form_user.password2|add_class:'form-control'}}
+                            {% for error in form_user.password2.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                      </div>
+                        <p></p>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-success">
+                          <span class="glyphicon glyphicon-ok"></span> Criar conta
+                        </button>
+                      </div>
+                    </form>
+              </div>
+            </div>
+   				</div>
+  			</div>
+  		</div>     
+    </div>
+  </div>
+</div>
+{% endblock %}

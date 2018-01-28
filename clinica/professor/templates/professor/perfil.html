@@ -1,0 +1,124 @@
+{% extends 'core/sistema_base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block titulo %}
+	PPGB | {{ user.nome }}
+{% endblock %}
+
+{% block content %}
+
+<div id="#content">
+	<ol class="breadcrumb">
+  		<li><a href="{% url 'core:sistema' %}">Início</a></li>
+  		<li class="active">Meu Perfil</li>
+	</ol>
+
+    <h1 id="titulo-pagina">Meu Perfil</h1>
+
+	{% if mensagem_erro %}
+		{% for erro in mensagem_erro %}
+			<div class="alert alert-danger alert-dismissible" role="alert">
+  				{{ erro }}
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+		{% endfor %}
+	{% endif %}
+
+	{% if mensagem_sucesso %}
+		<div class="alert alert-success alert-dismissible" role="alert">
+  			{{ mensagem_sucesso }}
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		</div>
+	{% endif %}
+
+	<form action="{% url 'professor:perfil' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+		<div class="form-row">
+			{% if user.foto_perfil %}
+                <p class="centered"><img id="box-perfil" src="{{ user.foto_perfil.url }}" class="img-circle" width="140" height="140"></p>
+                <h3 id="text-perfil"><b>{{user.nome}}</b></h3>
+            {% else %}
+                <p class="centered"><img id="box-perfil" src="{% static 'core/img/sem_foto.jpg' %}" class="img-circle" width="140" height="140"></p>
+            {% endif %}
+
+            <div class="form-group col-md-12" style="text-align: center;">
+                <label for="{{ form.foto_perfil.id_for_label }}">Imagem de Perfil</label>
+                {{ form.foto_perfil|add_class:'form-control'}}
+                {% for error in form.foto_perfil.errors %}
+                    <span class="help-block">{{ error }}</span>
+                 {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-row">
+        	<h3 style="color: #fc8100">Dados Pessoais</h3>
+            <div class="form-group col-md-12">
+                <label for="{{ form.nome.id_for_label }}">Nome</label>
+                {{ form.nome|add_class:'form-control'}}
+                {% for error in form.nome.errors %}
+                    <span class="help-block">{{ error }}</span>
+                 {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="{{ form.cpf.id_for_label }}">CPF</label>
+                {{ form.cpf|add_class:'form-control'}}
+                {% for error in form.cpf.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+                        
+            <div class="form-group col-md-3">
+                <label for="{{ form.cpf.id_for_label }}">Sexo</label>
+                {{ form.sexo|add_class:'form-control'}}
+                {% for error in form.sexo.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+                      
+            <div class="form-group col-md-4">
+                <label for="{{ form.data_nascimento.id_for_label }}">Nascimento</label>
+                {{ form.data_nascimento|add_class:'form-control'}}
+                {% for error in form.data_nascimento.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-row">
+        	<h3 style="color: #fc8100">Contato</h3>
+            <div class="form-group col-md-6">
+                <label for="{{ form.telefone.id_for_label }}">Telefone</label>
+                {{ form.telefone|add_class:'form-control'}}
+                {% for error in form.telefone.errors %}
+                     <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email|add_class:'form-control'}}
+                {% for error in form.email.errors %}
+                    <span class="help-block">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-row" style="text-align: center; margin: 20px;">
+            <button type="submit" class="btn btn-success">
+            	<span class="glyphicon glyphicon-ok"></span> Salvar
+            </button>
+        </div>
+    </form>
+ </div>
+                       
+
+{% endblock %}

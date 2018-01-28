@@ -1,0 +1,88 @@
+{% extends 'core/sistema_base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block titulo %}
+	PPGB | Exame Clínico Com Dentes
+{% endblock %}
+
+{% block content %}
+
+<div id="#content">
+	<ol class="breadcrumb">
+  		<li><a href="{% url 'core:sistema' %}">Início</a></li>
+      <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
+      <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
+      <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">Exames</a></li>
+      <li><a href="">Exame Clínico Com Dentes</a></li>
+	</ol>    
+  <legend>{{crianca.nome}}</legend>
+	<h1 id="titulo-pagina">Exame Clínico Com Dentes</h1>
+
+<div class="container" style="width: 100%; margin-top: 30px;">	  
+  <div class="row">
+      <form method="get">
+        <div class="well">
+          <h4 style="margin-top: 0">Filtros</h4>
+            <div class="row">
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.form.data_cadastro.id_for_label }}">Data do Exame</label>
+                {{ filter.form.data_cadastro|add_class:'form-control'}}
+              </div>
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.form.user.id_for_label }}">Usuário que Cadastrou</label>
+                {{ filter.form.user|add_class:'form-control'}}
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-search"></span> Procurar
+            </button>
+
+            <button type="button" class="btn btn-success">
+              <a id="button-link" href="{% url 'crianca:cadastrar_clinico_com_dentes' pk=crianca.pk %}"> <span title="Cadastrar Exame Clínico Com Dentes" class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar</a>
+            </button>
+
+        </div>
+      </form>
+    </div><!-- /.row -->
+
+    {% if filter.qs.count >= 10 %}
+      <p>Mostrando 10 de {{ filter.qs.count }} resultado(s). Combine os filtros para resultados mais específicos.</p>
+    {% else %}
+      <p>Mostrando {{ filter.qs.count }} de {{ filter.qs.count }} resultado(s). Combine os filtros para resultados mais específicos.</p>
+    {% endif%}
+    
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Data de Cadastro</th>
+        <th>Usuário que Cadastrou</th>
+        <th></th>
+        <th></th>
+      </tr>
+   	</thead>
+    <tbody id="myTable">
+    	{% for exame in filter.qs|slice:":10"%}
+      	<tr>
+          <td>{{exame.data_cadastro}}</td>
+        	<td>{{exame.user}}</td>
+          <td style="text-align:center;">
+            <a href="{% url 'crianca:editar_clinico_com_dentes' pk=crianca.pk epk=exame.pk %}">
+              <i class="material-icons" title="Ver Cadastro" style="font-size:20px;color:darkgreen">mode_edit</i>
+            </a>
+          </td>
+          <td style="text-align:center;">
+            <a href="{% url 'crianca:deletar_clinico_com_dentes' pk=crianca.pk epk=exame.pk %}">
+              <i class="material-icons" title="Deletar" style="font-size:20px;color:darkred;">delete</i>
+            </a>
+          </td>
+      	</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+	</div>
+</div>
+
+{% endblock %}

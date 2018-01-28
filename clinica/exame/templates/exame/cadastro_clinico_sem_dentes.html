@@ -1,0 +1,103 @@
+{% extends 'core/sistema_base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block titulo %}
+  PPGB | Cadastro Exame Clínico Sem Dentes
+{% endblock %}
+
+{% block content %}
+
+<div id="#content">
+
+  <ol class="breadcrumb">
+      <li><a href="{% url 'core:sistema' %}">Início</a></li>
+      <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
+      <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
+      <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">Exames</a></li>
+      <li><a href="{% url 'crianca:listar_clinico_sem_dentes' pk=crianca.pk %}">Exame Clínico Sem Dentes</a></li>
+      <li class="active">Cadastrar</li>
+  </ol>    
+  <h1 id="titulo-pagina">Cadastrar Exame Clínico Sem Dentes</h1>
+
+  <div style="margin-top: 20px;">
+    <form action="{% url 'crianca:cadastrar_clinico_sem_dentes' pk=crianca.pk %}" method="post">
+      {% csrf_token %}
+      
+      <div class="form-group col-md-12">
+        
+        <div class="form-group col-md-3">
+          <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
+          {{ form.user|add_class:'form-control'}}
+          {% for error in form.user.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
+          {{ form.data_cadastro|add_class:'form-control'}}
+          {% for error in form.data_cadastro.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <h3 style="color: #fc8100">Saúde Bucal do Bebê</h3>
+        <div class="form-group col-md-3">
+          <label for="{{ form.lingua_suja.id_for_label }}">Língua suja?</label>
+          {{ form.lingua_suja|add_class:'form-control'}}
+          {% for error in form.lingua_suja.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-4">
+          <label for="{{ form.lingua.id_for_label }}">Tipo de Língua</label>
+          {{ form.lingua|add_class:'form-control'}}
+          {% for error in form.lingua.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-5">
+          <label for="{{ form.tipo_lingua.id_for_label }}">Outro</label>
+          {{ form.tipo_lingua|add_class:'form-control'}}
+          {% for error in form.tipo_lingua.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <div class="form-group col-md-3">
+          <label for="{{ form.tecido_mole.id_for_label }}">Tecidos moles?</label>
+          {{ form.tecido_mole|add_class:'form-control'}}
+          {% for error in form.tecido_mole.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-6">
+          <label for="{{ form.tecido_alterado.id_for_label }}">Alteração</label>
+          {{ form.tecido_alterado|add_class:'form-control'}}
+          {% for error in form.tecido_alterado.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.anquiloglossia.id_for_label }}">Anquiloglossia</label>
+          {{ form.anquiloglossia|add_class:'form-control'}}
+          {% for error in form.anquiloglossia.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>        
+
+      <div class="form-group" style="text-align: center;">
+        <button type="submit" class="btn btn-success">
+          <span class="glyphicon glyphicon-ok"></span> Cadastrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends 'core/sistema_base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block titulo %}
+  PPGB | Editar Primeira Consulta Sem Dentes
+{% endblock %}
+
+{% block content %}
+
+<div id="#content">
+
+  <ol class="breadcrumb">
+      <li><a href="{% url 'core:sistema' %}">Início</a></li>
+      <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
+      <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
+      <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">Exames</a></li>
+      <li><a href="{% url 'crianca:listar_consulta_sem_dentes' pk=crianca.pk %}">Exame Primeira Consulta Sem Dentes</a></li>
+      <li class="active">Editar</li>
+  </ol>    
+  <h1 id="titulo-pagina">Editar Primeira Consulta Sem Dentes</h1>
+
+  {% if mensagem_sucesso %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+        {{ mensagem_sucesso }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+  {% endif %}
+
+  <div style="margin-top: 20px;">
+    <form action="{% url 'crianca:editar_consulta_sem_dentes' pk=crianca.pk epk=exame.pk%}" method="post">
+      {% csrf_token %}
+      
+      <div class="form-group col-md-12">
+        <div class="form-group col-md-4">
+          <label for="{{ form.crianca.id_for_label }}">Criança</label>
+          {{ form.crianca|add_class:'form-control'}}
+          {% for error in form.crianca.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
+          {{ form.user|add_class:'form-control'}}
+          {% for error in form.user.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
+          {{ form.data_cadastro|add_class:'form-control'}}
+          {% for error in form.data_cadastro.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <h3 style="color: #fc8100">Higiene do Bebê</h3>
+        <div class="form-group col-md-3">
+          <label for="{{ form.habitos_nao_nutritivos.id_for_label }}">Hábitos não nutritivos?</label>
+          {{ form.habitos_nao_nutritivos|add_class:'form-control'}}
+          {% for error in form.habitos_nao_nutritivos.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-9">
+          <label for="{{ form.quais_habitos.id_for_label }}">Quais?</label>
+          {{ form.quais_habitos|add_class:'form-control'}}
+          {% for error in form.quais_habitos.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <div class="form-group col-md-7">
+          <label for="{{ form.frequencia_habitos.id_for_label }}">Frequência dos Hábitos</label>
+          {{ form.frequencia_habitos|add_class:'form-control'}}
+          {% for error in form.frequencia_habitos.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.quando_comecou_habitos.id_for_label }}">Quando começaram?</label>
+          {{ form.quando_comecou_habitos|add_class:'form-control'}}
+          {% for error in form.quando_comecou_habitos.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-2">
+          <label for="{{ form.permanece_habito.id_for_label }}">Ainda permanecem?</label>
+          {{ form.permanece_habito|add_class:'form-control'}}
+          {% for error in form.permanece_habito.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <div class="form-group col-md-3">
+          <label for="{{ form.idade_permanceu_habitos.id_for_label }}">Até que idade permaneceu?</label>
+          {{ form.idade_permanceu_habitos|add_class:'form-control'}}
+          {% for error in form.idade_permanceu_habitos.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-9">
+          <label for="{{ form.quando_comecou_habitos.id_for_label }}">Quais problemas esses hábitos podem causar?</label>
+          {{ form.quando_comecou_habitos|add_class:'form-control'}}
+          {% for error in form.quando_comecou_habitos.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <h3 style="color: #fc8100">Higiene da Família</h3>
+        <div class="form-group col-md-3">
+          <label for="{{ form.caries_mae.id_for_label }}">Cáries na Mãe?</label>
+          {{ form.caries_mae|add_class:'form-control'}}
+          {% for error in form.caries_mae.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.classificacao_boca_mae.id_for_label }}">Saúde bucal da Mãe</label>
+          {{ form.classificacao_boca_mae|add_class:'form-control'}}
+          {% for error in form.classificacao_boca_mae.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.caries_pai.id_for_label }}">Cáries no Pai?</label>
+          {{ form.caries_pai|add_class:'form-control'}}
+          {% for error in form.caries_pai.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-3">
+          <label for="{{ form.caries_irmaos.id_for_label }}">Cáries nos Irmãos?</label>
+          {{ form.caries_irmaos|add_class:'form-control'}}
+          {% for error in form.caries_irmaos.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <div class="form-group col-md-3">
+          <label for="{{ form.examina_boca.id_for_label }}">Examina a boca da Criança?</label>
+          {{ form.examina_boca|add_class:'form-control'}}
+          {% for error in form.examina_boca.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+        <div class="form-group col-md-9">
+          <label for="{{ form.motivo_caries.id_for_label }}">Por que os dentes ficam Cariados?</label>
+          {{ form.motivo_caries|add_class:'form-control'}}
+          {% for error in form.motivo_caries.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <div class="form-group col-md-12">
+          <label for="{{ form.como_prevenir.id_for_label }}">Como Prevenir?</label>
+          {{ form.como_prevenir|add_class:'form-control'}}
+          {% for error in form.como_prevenir.errors %}
+                    <span class="help-block">{{ error }}</span>
+           {% endfor %}
+        </div>
+      </div>
+            
+
+      <div class="form-group" style="text-align: center;">
+        <button type="submit" class="btn btn-success">
+          <span class="glyphicon glyphicon-ok"></span> Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

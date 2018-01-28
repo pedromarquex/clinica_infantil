@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static 'core/css/home.css' %}" />
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+		<style>
+     		 /* Always set the map height explicitly to define the size of the div
+     		  * element that contains the map. */
+     		 #map {
+      		  height: 100%;
+     		 }
+   		</style>
+
+		<title>PPGB | Início</title>
+	</head>
+	<body>
+		<div class="jumbotron">
+  			<div class="container">
+  				<h1 id="titulo" class="display-1">PPGB</h1>
+  				<h2 id="titulo">Programa Preventivo para Gestantes e Bebês</h2>
+ 			</div>
+		</div>		
+		<nav class="nav nav-tabs" id="myTab" role="tablist">
+  			<a class="nav-item nav-link" id="nav-sobre-tab" data-toggle="tab" href="#nav-sobre" role="tab" aria-controls="nav-sobre" aria-selected="false">Sobre</a>
+  			<a class="nav-item nav-link" id="nav-servicos-tab" data-toggle="tab" href="#nav-servicos" role="tab" aria-controls="nav-servicos" aria-selected="false">Serviços</a>
+  			<a class="nav-item nav-link" id="nav-local-tab" data-toggle="tab" href="#nav-local" role="tab" aria-controls="nav-local" aria-selected="false">Localização</a>
+  			<a class="nav-item nav-link active" id="nav-login-tab" data-toggle="tab" href="#nav-login" role="tab" aria-controls="nav-login" aria-selected="true">Login</a>
+		</nav>
+		{% block content %}
+        {% endblock %}
+	<footer id="titulo">
+		PPGB | Universidade Federal do Piauí, 2018<br>
+		ppgb@ufpi.edu.br
+	</footer>
+	</body>
+</html>

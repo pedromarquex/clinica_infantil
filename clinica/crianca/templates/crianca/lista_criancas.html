@@ -1,0 +1,117 @@
+{% extends 'core/sistema_base.html' %}
+{% load widget_tweaks %}
+{% load staticfiles %}
+
+{% block titulo %}
+	PPGB | Crianças
+{% endblock %}
+
+{% block content %}
+
+<div id="#content">
+	<ol class="breadcrumb">
+  		<li><a href="{% url 'core:sistema' %}">Início</a></li>
+  		<li class="active">Crianças</li>
+	</ol>    
+	<h1 id="titulo-pagina">Crianças</h1>
+
+  <div class="container" style="width: 100%;">	  
+    <div class="row">
+      <form method="get">
+        <div class="well">
+          <h4 style="margin-top: 0">Filtros</h4>
+            <div class="row">
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.form.nome.id_for_label }}">Nome</label>
+                {{ filter.form.nome|add_class:'form-control'}}
+              </div>
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.form.nome_mae.id_for_label }}">Mãe</label>
+                {{ filter.form.nome_mae|add_class:'form-control'}}
+              </div>
+              <div class="form-group col-sm-4 col-md-4">
+                <label for="{{ filter.form.nome_pai.id_for_label }}">Pai</label>
+                {{ filter.form.nome_pai|add_class:'form-control'}}
+              </div> 
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-8 col-md-2">
+                <label for="{{ filter.form.data_nascimento.id_for_label }}">Data de Nascimento</label>
+                {{ filter.form.data_nascimento|add_class:'form-control'}}
+              </div>
+              <div class="form-group col-sm-8 col-md-3">
+                <label for="{{ filter.form.user.id_for_label }}">Usuário que Cadastrou</label>
+                {{ filter.form.user|add_class:'form-control'}}
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <span class="glyphicon glyphicon-search"></span> Procurar
+            </button>
+
+            <button type="button" class="btn btn-success">
+              <a id="button-link" href="{% url 'crianca:cadastrar' %}"> <span title="Cadastrar Criança" class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cadastrar</a>
+            </button>
+
+        </div>
+      </form>
+    </div><!-- /.row -->
+
+  {% if filter.qs.count >= 10 %}
+    <p>Mostrando 10 de {{ filter.qs.count }} resultado(s). Combine os filtros para resultados mais específicos.</p>
+  {% else %}
+    <p>Mostrando {{ filter.qs.count }} de {{ filter.qs.count }} resultado(s). Combine os filtros para resultados mais específicos.</p>
+  {% endif%}
+
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Mãe</th>
+        <th>Pai</th>
+        <th>Data de Cadastro</th>
+        <th>Usuário que Cadastrou</th>
+        <th></th>
+        <th></th>
+        {% if is_professor%}
+          <th></th>
+        {% endif%}
+      </tr>
+   	</thead>
+    <tbody id="myTable">
+    	{% for crianca in filter.qs|slice:":10"%}
+
+      	<tr>
+        	<td>{{crianca.nome}}</td>
+        	<td>{{crianca.nome_mae}}</td>
+        	<td>{{crianca.nome_pai}}</td>
+          <td>{{crianca.data_nascimento}}</td>
+        	<td>{{crianca.user}}</td>
+          <td style="text-align:center;">
+            <a href="{% url 'crianca:editar' pk=crianca.pk %}">
+              <i class="material-icons" title="Ver Cadastro" style="font-size:20px;color:darkgreen">mode_edit</i>
+            </a>
+          </td>
+          <td style="text-align:center;">
+            <a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">
+              <i class="material-icons" title="Ver Exames" style="font-size:20px;color:darkblue">content_copy</i>
+            </a>
+          </td>
+          {% if is_professor %}
+            <td style="text-align:center;">
+              <a href="{% url 'crianca:deletar' pk=crianca.pk %}">
+                <i class="material-icons" title="Deletar" style="font-size:20px;color:darkred;">delete</i>
+              </a>
+            </td>
+          {% endif %}
+      	</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+	</div>
+</div>
+
+{% endblock %}
