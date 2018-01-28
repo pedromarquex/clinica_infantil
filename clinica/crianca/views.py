@@ -40,6 +40,7 @@ def cadastrar(request):
 
 @login_required
 def listar_criancas(request):
+    is_professor = None
     for grupo in request.user.groups.all():
         if grupo.name == "Aluno":
             is_professor = False
