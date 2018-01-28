@@ -1,0 +1,89 @@
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url("../img/bear.jpeg");
+    background-color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 0px;
+}
+
+#titulo {
+	color: white;
+	text-shadow: 0.5px 0.5px #000000;
+}
+
+.nav-tabs {
+	background: #fc8100;
+}
+
+#myTab {
+	border-top-style: solid;
+    border-top-color: white;
+}
+
+.nav-item {
+	color: white;
+	padding: 10px;
+	text-decoration: bold;
+}
+
+a:hover {
+	color: white;
+}
+
+.container {
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+p {
+	text-align: justify;
+    text-justify: inter-word;
+    text-indent: 50px;
+}
+
+.cabecalho {
+	padding: 10px;
+}
+
+.cabecalho-spam {
+	padding-top: 50px;
+	text-align: center;	
+	padding-bottom: 10px;
+}
+
+.cabecalho-map-spam {
+	padding-top: 25px;
+	text-align: center;	
+	padding-bottom: 10px;
+}
+
+footer {
+	background-image: url("../img/grass.jpeg");
+    padding: 1em;
+    color: white;
+    background-color: #fc8100;
+    clear: left;
+    text-align: center;
+}
+
+.carousel-caption {
+	color: white;
+	text-shadow: 0.5px 0.5px #000000;
+
+}
+
+.slide {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#servicos {
+	text-align: center;
+}
+
+.collapse {
+	text-align: center;
+}

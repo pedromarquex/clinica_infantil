@@ -1,0 +1,56 @@
+#titulo-pagina {
+    text-align: left;
+    color: black;
+    border-bottom: solid;
+    border-color: #fc8100;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    color: #333333;
+}
+
+th {
+	background-color: #fc8100;
+	color: white;
+}
+
+td {
+    font-size: 15px;
+}
+
+#b-link {
+	background-color: #fc8100;
+}
+
+#button-link {
+	color: white;
+}
+
+#box-perfil {
+    border: solid;
+    border-color: #fc8100;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+#text-perfil {
+    text-align: center; 
+    color: #fc8100;
+}
+
+#nome-sidebar {
+    padding: 3px;
+    text-align: center;
+}
+
+#list-group {
+    background-color: #b25f0a;
+    border-color: white;
+}
+
+#list-group1 {
+    background-color: #fc8100;
+    border-color: white;
+}
+
+#dentes {
+    text-align: center;
+}

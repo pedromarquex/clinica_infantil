@@ -1,6 +1,5 @@
 myvenv/
 media/
-static/
 *.ini
 
 ### Django ###
