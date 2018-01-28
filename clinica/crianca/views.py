@@ -21,13 +21,7 @@ def cadastrar(request):
             crianca.user = request.user
             crianca.save()
 
-            for i in range(1, 22):
-                crianca = CriancaForm(request.POST)
-                crianca = crianca.save()
-                crianca.nome += str(i)
-                crianca.save()
-
-            return redirect('crianca:listar_exames')
+            return redirect('crianca:listar_exames', pk=crianca.pk)
 
     try:
         user = Aluno.objects.get(user=request.user)
@@ -40,6 +34,7 @@ def cadastrar(request):
 
 @login_required
 def listar_criancas(request):
+    is_professor = None
     for grupo in request.user.groups.all():
         if grupo.name == "Aluno":
             is_professor = False
