@@ -93,10 +93,19 @@ class Anamnese(models.Model):
     imagem = models.ImageField(upload_to='Anamnese', null=True, blank=True)
 
     # Usuário que cadastrou
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True)
 
     # Data do Cadastro
     data_cadastro = models.DateField(null=True)
+
+    # É válido
+    valido = models.BooleanField(default=False)
+
+    # Usuário que validou
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+
+    # Data de validação
+    data_validacao = models.DateTimeField(null=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -216,6 +225,15 @@ class PrimeiraConsultaComDentes(models.Model):
     # Data do Cadastro
     data_cadastro = models.DateField(null=True)
 
+    # É válido
+    valido = models.BooleanField(default=False)
+
+    # Usuário que validou
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+
+    # Data de validação
+    data_validacao = models.DateTimeField(null=True)
+
     # Crianca
     crianca = models.ForeignKey(
         Crianca, on_delete=models.CASCADE, null=True, blank=True)
@@ -266,6 +284,15 @@ class PrimeiraConsultaSemDentes(models.Model):
     # Data do Cadastro
     data_cadastro = models.DateField(null=True)
 
+    # É válido
+    valido = models.BooleanField(default=False)
+
+    # Usuário que validou
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+
+    # Data de validação
+    data_validacao = models.DateTimeField(null=True)
+
     # Crianca
     crianca = models.ForeignKey(
         Crianca, on_delete=models.CASCADE, null=True, blank=True)
@@ -304,6 +331,15 @@ class ExameClinicoSemDentes(models.Model):
 
     # Data do Cadastro
     data_cadastro = models.DateField(null=True)
+
+    # É válido
+    valido = models.BooleanField(default=False)
+
+    # Usuário que validou
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+
+    # Data de validação
+    data_validacao = models.DateTimeField(null=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -446,6 +482,15 @@ class ExameClinicoComDentes(models.Model):
 
     # Data do Cadastro
     data_cadastro = models.DateField(null=True)
+
+    # É válido
+    valido = models.BooleanField(default=False)
+
+    # Usuário que validou
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+
+    # Data de validação
+    data_validacao = models.DateTimeField(null=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -656,6 +701,15 @@ class Retorno(models.Model):
 
     # Data do Cadastro
     data_cadastro = models.DateField(null=True)
+
+    # É válido
+    valido = models.BooleanField(default=False)
+
+    # Usuário que validou
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+
+    # Data de validação
+    data_validacao = models.DateTimeField(null=True)
 
     # Crianca
     crianca = models.ForeignKey(

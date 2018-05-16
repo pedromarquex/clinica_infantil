@@ -3,114 +3,166 @@
 {% load staticfiles %}
 
 {% block titulo %}
-  PPGB | Editar Exame Clínico Sem Dentes
+PPGB | Editar Exame Clínico Sem Dentes
 {% endblock %}
 
 {% block content %}
 
 <div id="#content">
 
-  <ol class="breadcrumb">
-      <li><a href="{% url 'core:sistema' %}">Início</a></li>
-      <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
-      <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
-      <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">Exames</a></li>
-      <li><a href="{% url 'crianca:listar_clinico_sem_dentes' pk=crianca.pk %}">Exame Clínico Sem Dentes</a></li>
-      <li class="active">Editar</li>
-  </ol>    
-  <h1 id="titulo-pagina">Editar Exame Clínico Sem Dentes</h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'core:sistema' %}">Início</a></li>
+        <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
+        <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
+        <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">Exames</a></li>
+        <li><a href="{% url 'crianca:listar_clinico_sem_dentes' pk=crianca.pk %}">Exame Clínico Sem Dentes</a></li>
+        <li class="active">Editar</li>
+    </ol>
+    <h1 id="titulo-pagina">Editar Exame Clínico Sem Dentes</h1>
 
-  {% if mensagem_sucesso %}
+    {% if mensagem_sucesso %}
     <div class="alert alert-success alert-dismissible" role="alert">
         {{ mensagem_sucesso }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
     </div>
-  {% endif %}
+    {% endif %}
 
-  <div style="margin-top: 20px;">
-    <form action="{% url 'crianca:editar_clinico_sem_dentes' pk=crianca.pk epk=exame.pk %}" method="post">
-      {% csrf_token %}
-      
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-4">
-          <label for="{{ form.crianca.id_for_label }}">Criança</label>
-          {{ form.crianca|add_class:'form-control'}}
-          {% for error in form.crianca.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
-          {{ form.user|add_class:'form-control'}}
-          {% for error in form.user.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
-          {{ form.data_cadastro|add_class:'form-control'}}
-          {% for error in form.data_cadastro.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+    <div style="margin-top: 20px;">
+        <form action="{% url 'crianca:editar_clinico_sem_dentes' pk=crianca.pk epk=exame.pk %}" method="post">
+            {% csrf_token %}
 
-      <div class="form-group col-md-12">
-        <h3 style="color: #fc8100">Saúde Bucal do Bebê</h3>
-        <div class="form-group col-md-3">
-          <label for="{{ form.lingua_suja.id_for_label }}">Língua suja?</label>
-          {{ form.lingua_suja|add_class:'form-control'}}
-          {% for error in form.lingua_suja.errors %}
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-4">
+                    <label for="{{ form.crianca.id_for_label }}">Criança</label>
+                    {{ form.crianca|add_class:'form-control'}}
+                    {% for error in form.crianca.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-4">
-          <label for="{{ form.lingua.id_for_label }}">Tipo de Língua</label>
-          {{ form.lingua|add_class:'form-control'}}
-          {% for error in form.lingua.errors %}
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
+                    {{ form.user|add_class:'form-control'}}
+                    {% for error in form.user.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-5">
-          <label for="{{ form.tipo_lingua.id_for_label }}">Outro</label>
-          {{ form.tipo_lingua|add_class:'form-control'}}
-          {% for error in form.tipo_lingua.errors %}
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
+                    {{ form.data_cadastro|add_class:'form-control'}}
+                    {% for error in form.data_cadastro.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-3">
-          <label for="{{ form.tecido_mole.id_for_label }}">Tecidos moles?</label>
-          {{ form.tecido_mole|add_class:'form-control'}}
-          {% for error in form.tecido_mole.errors %}
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Saúde Bucal do Bebê</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.lingua_suja.id_for_label }}">Língua suja?</label>
+                    {{ form.lingua_suja|add_class:'form-control'}}
+                    {% for error in form.lingua_suja.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-6">
-          <label for="{{ form.tecido_alterado.id_for_label }}">Alteração</label>
-          {{ form.tecido_alterado|add_class:'form-control'}}
-          {% for error in form.tecido_alterado.errors %}
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="{{ form.lingua.id_for_label }}">Tipo de Língua</label>
+                    {{ form.lingua|add_class:'form-control'}}
+                    {% for error in form.lingua.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.anquiloglossia.id_for_label }}">Anquiloglossia</label>
-          {{ form.anquiloglossia|add_class:'form-control'}}
-          {% for error in form.anquiloglossia.errors %}
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="{{ form.tipo_lingua.id_for_label }}">Outro</label>
+                    {{ form.tipo_lingua|add_class:'form-control'}}
+                    {% for error in form.tipo_lingua.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>        
+                    {% endfor %}
+                </div>
+            </div>
 
-      <div class="form-group" style="text-align: center;">
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.tecido_mole.id_for_label }}">Tecidos moles?</label>
+                    {{ form.tecido_mole|add_class:'form-control'}}
+                    {% for error in form.tecido_mole.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="{{ form.tecido_alterado.id_for_label }}">Alteração</label>
+                    {{ form.tecido_alterado|add_class:'form-control'}}
+                    {% for error in form.tecido_alterado.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.anquiloglossia.id_for_label }}">Anquiloglossia</label>
+                    {{ form.anquiloglossia|add_class:'form-control'}}
+                    {% for error in form.anquiloglossia.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!--condição para validar-->
+            {% if perms.professor.pode_validar %}
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Validação</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.valido.id_for_label }}">Clique para validar o exame</label>
+                    {{ form.valido|add_class:'form-control' }}
+                    {% for error in form.valido.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="{{ form.valido.id_for_label }}">Validado por</label>
+                    {{ form.validado_por|add_class:'form-control' }}
+                    {% for error in form.validado_por.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_validacao.id_for_label }}">Data de validação</label>
+                    {{ form.data_validacao|add_class:'form-control' }}
+                    {% for error in form.data_validacao.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+
+                <div class="form-group col-md-12">
+                    <h3 style="color: #fc8100">Validação</h3>
+                    <div class="form-group col-md-3">
+                        <label for="{{ form.validado_por.id_for_label }}">Usuário que validou</label>
+                        {{ form.validado_por|add_class:'form-control'|attr:'disabled' }}
+                        {% for error in form.validado_por.errors %}
+                        <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="{{ form.data_validacao.id_for_label }}">Data de validação</label>
+                        {{ form.data_validacao|add_class:'form-control'|attr:'disabled' }}
+                        {% for error in form.data_validacao.errors %}
+                        <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endif %}
+            </div>
+
+    </div>
+
+    <div class="form-group" style="text-align: center;">
         <button type="submit" class="btn btn-success">
-          <span class="glyphicon glyphicon-ok"></span> Salvar
+            <span class="glyphicon glyphicon-ok"></span> Salvar
         </button>
-      </div>
+    </div>
     </form>
-  </div>
+</div>
 </div>
 
 {% endblock %}

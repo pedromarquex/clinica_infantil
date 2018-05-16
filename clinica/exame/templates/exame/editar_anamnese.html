@@ -3,316 +3,370 @@
 {% load staticfiles %}
 
 {% block titulo %}
-  PPGB | Editar Anamnese
+PPGB | Editar Anamnese
 {% endblock %}
 
 {% block content %}
 
 <div id="#content">
 
-  <ol class="breadcrumb">
-      <li><a href="{% url 'core:sistema' %}">Início</a></li>
-      <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
-      <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
-      <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">Exames</a></li>
-      <li><a href="{% url 'crianca:listar_anamnese' pk=crianca.pk %}">Anamneses</a></li>
-      <li class="active">Editar</li>
-  </ol>    
-  <h1 id="titulo-pagina">Editar Anamnese</h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'core:sistema' %}">Início</a></li>
+        <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
+        <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
+        <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">Exames</a></li>
+        <li><a href="{% url 'crianca:listar_anamnese' pk=crianca.pk %}">Anamneses</a></li>
+        <li class="active">Editar</li>
+    </ol>
+    <h1 id="titulo-pagina">Editar Anamnese</h1>
 
-  {% if mensagem_sucesso %}
+    {% if mensagem_sucesso %}
     <div class="alert alert-success alert-dismissible" role="alert">
         {{ mensagem_sucesso }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
     </div>
-  {% endif %}
-  
-  <div style="margin-top: 20px;">
-    <form action="{% url 'crianca:editar_anamnese' pk=crianca.pk epk=exame.pk%}" method="post">
-      {% csrf_token %}
-      
-      {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-      {% endfor %}
-      
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-4">
-          <label for="{{ form.crianca.id_for_label }}">Criança</label>
-          {{ form.crianca|add_class:'form-control'}}
-          {% for error in form.crianca.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
-          {{ form.user|add_class:'form-control'}}
-          {% for error in form.user.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
-          {{ form.data_cadastro|add_class:'form-control'}}
-          {% for error in form.data_cadastro.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+    {% endif %}
 
-      <div class="form-group col-md-12">
-         <h3 style="color: #fc8100">Histórico da Gravidez</h3>
-        <div class="form-group col-md-3">
-          <label for="{{ form.doenca_na_gravidez.id_for_label }}">Doença na gravidez?</label>
-          {{ form.doenca_na_gravidez|add_class:'form-control'}}
-          {% for error in form.doenca_na_gravidez.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-9">
-          <label for="{{ form.qual_doenca.id_for_label }}">Qual?</label>
-          {{ form.qual_doenca|add_class:'form-control'}}
-          {% for error in form.qual_doenca.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+    <div style="margin-top: 20px;">
+        <form action="{% url 'crianca:editar_anamnese' pk=crianca.pk epk=exame.pk%}" method="post">
+            {% csrf_token %}
 
-      <div class="form-group col-md-12">
-         <h3 style="color: #fc8100">Higiene do Bebê</h3>
-        <div class="form-group col-md-3">
-          <label for="{{ form.limpa_boca_bebe.id_for_label }}">Limpa boca do Bebê?</label>
-          {{ form.limpa_boca_bebe|add_class:'form-control'}}
-          {% for error in form.limpa_boca_bebe.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+            {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
 
-        <div class="form-group col-md-3">
-          <label for="{{ form.quem_limpa_boca.id_for_label }}">Quem limpa?</label>
-          {{ form.quem_limpa_boca|add_class:'form-control'}}
-          {% for error in form.quem_limpa_boca.errors %}
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-4">
+                    <label for="{{ form.crianca.id_for_label }}">Criança</label>
+                    {{ form.crianca|add_class:'form-control'}}
+                    {% for error in form.crianca.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
+                    {{ form.user|add_class:'form-control'}}
+                    {% for error in form.user.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
+                    {{ form.data_cadastro|add_class:'form-control'}}
+                    {% for error in form.data_cadastro.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="form-group col-md-3">
-          <label for="{{ form.aceita_limpar.id_for_label }}">Bebê aceita limpar a boca?</label>
-          {{ form.aceita_limpar|add_class:'form-control'}}
-          {% for error in form.aceita_limpar.errors %}
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Histórico da Gravidez</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.doenca_na_gravidez.id_for_label }}">Doença na gravidez?</label>
+                    {{ form.doenca_na_gravidez|add_class:'form-control'}}
+                    {% for error in form.doenca_na_gravidez.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-9">
+                    <label for="{{ form.qual_doenca.id_for_label }}">Qual?</label>
+                    {{ form.qual_doenca|add_class:'form-control'}}
+                    {% for error in form.qual_doenca.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="form-group col-md-3">
-          <label for="{{ form.quando_nao_aceita.id_for_label }}">Quando não aceita</label>
-          {{ form.quando_nao_aceita|add_class:'form-control'}}
-          {% for error in form.quando_nao_aceita.errors %}
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Higiene do Bebê</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.limpa_boca_bebe.id_for_label }}">Limpa boca do Bebê?</label>
+                    {{ form.limpa_boca_bebe|add_class:'form-control'}}
+                    {% for error in form.limpa_boca_bebe.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
 
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-4">
-          <label for="{{ form.com_que_limpa.id_for_label }}">Com que limpa?</label>
-          {{ form.com_que_limpa|add_class:'form-control'}}
-          {% for error in form.com_que_limpa.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.quem_limpa_boca.id_for_label }}">Quem limpa?</label>
+                    {{ form.quem_limpa_boca|add_class:'form-control'}}
+                    {% for error in form.quem_limpa_boca.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
 
-        <div class="form-group col-md-3">
-          <label for="{{ form.quando_comecou.id_for_label }}">Quando começou?</label>
-          {{ form.quando_comecou|add_class:'form-control'}}
-          {% for error in form.quando_comecou.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.aceita_limpar.id_for_label }}">Bebê aceita limpar a boca?</label>
+                    {{ form.aceita_limpar|add_class:'form-control'}}
+                    {% for error in form.aceita_limpar.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.quem_orientou.id_for_label }}">Quem orientou?</label>
-          {{ form.quem_orientou|add_class:'form-control'}}
-          {% for error in form.quem_orientou.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-2">
-          <label for="{{ form.horarios.id_for_label }}">Horários</label>
-          {{ form.horarios|add_class:'form-control'}}
-          {% for error in form.horarios.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
 
-      <div class="form-group col-md-12">
-        <h3 style="color: #fc8100">Amamentação</h3>
-        <div class="form-group col-md-4">
-          <label for="{{ form.tempo_amamentacao.id_for_label }}">Tempo de Amamentação</label>
-          {{ form.tempo_amamentacao|add_class:'form-control'}}
-          {% for error in form.tempo_amamentacao.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.quando_nao_aceita.id_for_label }}">Quando não aceita</label>
+                    {{ form.quando_nao_aceita|add_class:'form-control'}}
+                    {% for error in form.quando_nao_aceita.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="form-group col-md-2">
-          <label for="{{ form.ainda_mama.id_for_label }}">Ainda mama?</label>
-          {{ form.ainda_mama|add_class:'form-control'}}
-          {% for error in form.ainda_mama.errors %}
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-4">
+                    <label for="{{ form.com_que_limpa.id_for_label }}">Com que limpa?</label>
+                    {{ form.com_que_limpa|add_class:'form-control'}}
+                    {% for error in form.com_que_limpa.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
 
-        <div class="form-group col-md-3">
-          <label for="{{ form.quando_parou_mamar.id_for_label }}">Quando parou de mamar?</label>
-          {{ form.quando_parou_mamar|add_class:'form-control'}}
-          {% for error in form.quando_parou_mamar.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.quando_comecou.id_for_label }}">Quando começou?</label>
+                    {{ form.quando_comecou|add_class:'form-control'}}
+                    {% for error in form.quando_comecou.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-
-        <div class="form-group col-md-3">
-          <label for="{{ form.idade_peito_noite.id_for_label }}">Idade peito noite</label>
-          {{ form.idade_peito_noite|add_class:'form-control'}}
-          {% for error in form.idade_peito_noite.errors %}
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.quem_orientou.id_for_label }}">Quem orientou?</label>
+                    {{ form.quem_orientou|add_class:'form-control'}}
+                    {% for error in form.quem_orientou.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
-
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-2">
-          <label for="{{ form.usou_mamadeira.id_for_label }}">Usou mamadeira?</label>
-          {{ form.usou_mamadeira|add_class:'form-control'}}
-          {% for error in form.usou_mamadeira.errors %}
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="{{ form.horarios.id_for_label }}">Horários</label>
+                    {{ form.horarios|add_class:'form-control'}}
+                    {% for error in form.horarios.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="form-group col-md-2">
-          <label for="{{ form.iniciou_mamadeira.id_for_label }}">Quando começou?</label>
-          {{ form.iniciou_mamadeira|add_class:'form-control'}}
-          {% for error in form.iniciou_mamadeira.errors %}
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Amamentação</h3>
+                <div class="form-group col-md-4">
+                    <label for="{{ form.tempo_amamentacao.id_for_label }}">Tempo de Amamentação</label>
+                    {{ form.tempo_amamentacao|add_class:'form-control'}}
+                    {% for error in form.tempo_amamentacao.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
 
-        <div class="form-group col-md-2">
-          <label for="{{ form.deixou_mamadeira.id_for_label }}">Quando deixou?</label>
-          {{ form.quando_parou_mamar|add_class:'form-control'}}
-          {% for error in form.quando_parou_mamar.errors %}
+                <div class="form-group col-md-2">
+                    <label for="{{ form.ainda_mama.id_for_label }}">Ainda mama?</label>
+                    {{ form.ainda_mama|add_class:'form-control'}}
+                    {% for error in form.ainda_mama.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
 
-        <div class="form-group col-md-3">
-          <label for="{{ form.idade_usou_durante_sono.id_for_label }}">Até quando usou durante o sono?</label>
-          {{ form.idade_usou_durante_sono|add_class:'form-control'}}
-          {% for error in form.idade_usou_durante_sono.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.quando_parou_mamar.id_for_label }}">Quando parou de mamar?</label>
+                    {{ form.quando_parou_mamar|add_class:'form-control'}}
+                    {% for error in form.quando_parou_mamar.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
 
-        <div class="form-group col-md-3">
-          <label for="{{ form.conteudo_mamadeira.id_for_label }}">Conteúdo da Mamadeira</label>
-          {{ form.conteudo_mamadeira|add_class:'form-control'}}
-          {% for error in form.conteudo_mamadeira.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.idade_peito_noite.id_for_label }}">Idade peito noite</label>
+                    {{ form.idade_peito_noite|add_class:'form-control'}}
+                    {% for error in form.idade_peito_noite.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-      <div class="form-group col-md-12">
-        <h3 style="color: #fc8100">Histórico de Doenças</h3>
-        <div class="form-group col-md-3">
-          <label for="{{ form.historico_alergias.id_for_label }}">Histórico de alergias?</label>
-          {{ form.historico_alergias|add_class:'form-control'}}
-          {% for error in form.historico_alergias.errors %}
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-2">
+                    <label for="{{ form.usou_mamadeira.id_for_label }}">Usou mamadeira?</label>
+                    {{ form.usou_mamadeira|add_class:'form-control'}}
+                    {% for error in form.usou_mamadeira.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
 
-        <div class="form-group col-md-9">
-          <label for="{{ form.qual_alergia.id_for_label }}">Qual?</label>
-          {{ form.qual_alergia|add_class:'form-control'}}
-          {% for error in form.qual_alergia.errors %}
+                <div class="form-group col-md-2">
+                    <label for="{{ form.iniciou_mamadeira.id_for_label }}">Quando começou?</label>
+                    {{ form.iniciou_mamadeira|add_class:'form-control'}}
+                    {% for error in form.iniciou_mamadeira.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
 
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-3">
-          <label for="{{ form.relato_problema_saude.id_for_label }}">Relatar problema de saúde? *</label>
-          {{ form.relato_problema_saude|add_class:'form-control'}}
-          {% for error in form.relato_problema_saude.errors %}
+                <div class="form-group col-md-2">
+                    <label for="{{ form.deixou_mamadeira.id_for_label }}">Quando deixou?</label>
+                    {{ form.quando_parou_mamar|add_class:'form-control'}}
+                    {% for error in form.quando_parou_mamar.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
 
-        <div class="form-group col-md-9">
-          <label for="{{ form.qual_problema_saude.id_for_label }}">Qual?</label>
-          {{ form.qual_problema_saude|add_class:'form-control'}}
-          {% for error in form.qual_problema_saude.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.idade_usou_durante_sono.id_for_label }}">Até quando usou durante o sono?</label>
+                    {{ form.idade_usou_durante_sono|add_class:'form-control'}}
+                    {% for error in form.idade_usou_durante_sono.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
 
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-3">
-          <label for="{{ form.historico_desordens_sanguineas.id_for_label }}">Histórico de desordens sanguíneas? *</label>
-          {{ form.historico_desordens_sanguineas|add_class:'form-control'}}
-          {% for error in form.historico_desordens_sanguineas.errors %}
+                <div class="form-group col-md-3">
+                    <label for="{{ form.conteudo_mamadeira.id_for_label }}">Conteúdo da Mamadeira</label>
+                    {{ form.conteudo_mamadeira|add_class:'form-control'}}
+                    {% for error in form.conteudo_mamadeira.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="form-group col-md-9">
-          <label for="{{ form.qual_desordem_sanguinea.id_for_label }}">Qual?</label>
-          {{ form.qual_desordem_sanguinea|add_class:'form-control'}}
-          {% for error in form.qual_desordem_sanguinea.errors %}
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Histórico de Doenças</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.historico_alergias.id_for_label }}">Histórico de alergias?</label>
+                    {{ form.historico_alergias|add_class:'form-control'}}
+                    {% for error in form.historico_alergias.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
 
-      <div class="form-group col-md-12">
-        <h3 style="color: #fc8100">Medicação</h3>
-        <div class="form-group col-md-3">
-          <label for="{{ form.tomando_algum_medicamento.id_for_label }}">Tomando algum medicamento? *</label>
-          {{ form.tomando_algum_medicamento|add_class:'form-control'}}
-          {% for error in form.tomando_algum_medicamento.errors %}
+                <div class="form-group col-md-9">
+                    <label for="{{ form.qual_alergia.id_for_label }}">Qual?</label>
+                    {{ form.qual_alergia|add_class:'form-control'}}
+                    {% for error in form.qual_alergia.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="form-group col-md-9">
-          <label for="{{ form.qual_medicamento.id_for_label }}">Qual?</label>
-          {{ form.qual_medicamento|add_class:'form-control'}}
-          {% for error in form.qual_medicamento.errors %}
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.relato_problema_saude.id_for_label }}">Relatar problema de saúde? *</label>
+                    {{ form.relato_problema_saude|add_class:'form-control'}}
+                    {% for error in form.relato_problema_saude.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
 
-      <div class="form-group col-md-12">
-        <h3 style="color: #fc8100">Anexo</h3>
-        <div class="form-group col-md-12">
-          <label for="{{ form.image.id_for_label }}">Anexar Imagem</label>
-          {{ form.image|add_class:'form-control'}}
-          {% for error in form.image.errors %}
+                <div class="form-group col-md-9">
+                    <label for="{{ form.qual_problema_saude.id_for_label }}">Qual?</label>
+                    {{ form.qual_problema_saude|add_class:'form-control'}}
+                    {% for error in form.qual_problema_saude.errors %}
                     <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-      <div class="form-group" style="text-align: center;">
-        <button type="submit" class="btn btn-success">
-          <span class="glyphicon glyphicon-ok"></span> Salvar
-        </button>
-      </div>
-    </form>
-  </div>
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.historico_desordens_sanguineas.id_for_label }}">Histórico de desordens
+                        sanguíneas? *</label>
+                    {{ form.historico_desordens_sanguineas|add_class:'form-control'}}
+                    {% for error in form.historico_desordens_sanguineas.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group col-md-9">
+                    <label for="{{ form.qual_desordem_sanguinea.id_for_label }}">Qual?</label>
+                    {{ form.qual_desordem_sanguinea|add_class:'form-control'}}
+                    {% for error in form.qual_desordem_sanguinea.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Medicação</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.tomando_algum_medicamento.id_for_label }}">Tomando algum medicamento? *</label>
+                    {{ form.tomando_algum_medicamento|add_class:'form-control'}}
+                    {% for error in form.tomando_algum_medicamento.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group col-md-9">
+                    <label for="{{ form.qual_medicamento.id_for_label }}">Qual?</label>
+                    {{ form.qual_medicamento|add_class:'form-control'}}
+                    {% for error in form.qual_medicamento.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <!--condição para validar-->
+            {% if perms.professor.pode_validar %}
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Validação</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.valido.id_for_label }}">Clique para validar o exame</label>
+                    {{ form.valido|add_class:'form-control' }}
+                    {% for error in form.valido.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="{{ form.valido.id_for_label }}">Validado por</label>
+                    {{ form.validado_por|add_class:'form-control' }}
+                    {% for error in form.validado_por.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_validacao.id_for_label }}">Data de validação</label>
+                    {{ form.data_validacao|add_class:'form-control' }}
+                    {% for error in form.data_validacao.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+
+                <div class="form-group col-md-12">
+                    <h3 style="color: #fc8100">Validação</h3>
+                    <div class="form-group col-md-3">
+                        <label for="{{ form.validado_por.id_for_label }}">Usuário que validou</label>
+                        {{ form.validado_por|add_class:'form-control'|attr:'disabled' }}
+                        {% for error in form.validado_por.errors %}
+                        <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="{{ form.data_validacao.id_for_label }}">Data de validação</label>
+                        {{ form.data_validacao|add_class:'form-control'|attr:'disabled' }}
+                        {% for error in form.data_validacao.errors %}
+                        <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% endif %}
+            </div>
+
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Anexo</h3>
+                <div class="form-group col-md-12">
+                    <label for="{{ form.imagem.id_for_label }}">Anexar Imagem</label>
+                    {{ form.imagem|add_class:'form-control'}}
+                    {% for error in form.imagem.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+
+            <div class="form-group" style="text-align: center;">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}
