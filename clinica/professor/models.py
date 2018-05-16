@@ -17,10 +17,5 @@ class Professor(models.Model):
     # Usuario do Professor
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
-    class Meta:
-        permissions = (
-            ('pode_validar', 'Pode validar'),
-        )
-
     def __str__(self):
         return self.nome
