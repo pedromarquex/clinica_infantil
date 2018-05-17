@@ -23,8 +23,9 @@ $ python manage.py runserver
 
 ## Colaboradores
 
-* **Felipe Barros** - *Initial work* - [felipebarroscaminha](https://github.com/PurpleBooth)
-* **Eduardo Alencar** - *Initial work*
+* **Felipe Barros** - *Initial work* - [felipebarroscaminha](https://github.com/felipebarroscaminha)
+* **Eduardo Alencar** - *Initial work*- [jeduardo824](https://github.com/jeduardo824)
+* **Pedro Marques** - *Initial work* - [pedromarquex](https://github.com/pedromarquex)
 
 Veja os [contribuidores](https://github.com/PPGB-UFPI/clinica_infantil/graphs/contributors) que participaram deste projeto.
 
