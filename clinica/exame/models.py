@@ -93,19 +93,19 @@ class Anamnese(models.Model):
     imagem = models.ImageField(upload_to='Anamnese', null=True, blank=True)
 
     # Usuário que cadastrou
-    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data do Cadastro
-    data_cadastro = models.DateField(null=True)
+    data_cadastro = models.DateField(auto_now_add=True, null=True, blank=True)
 
     # É válido
     valido = models.BooleanField(default=False)
 
     # Usuário que validou
-    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data de validação
-    data_validacao = models.DateTimeField(null=True)
+    data_validacao = models.DateTimeField(null=True, blank=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -220,19 +220,19 @@ class PrimeiraConsultaComDentes(models.Model):
         default=1, null=True, blank=True)
 
     # Usuário que cadastrou
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data do Cadastro
-    data_cadastro = models.DateField(null=True)
+    data_cadastro = models.DateField(auto_now_add=True, null=True, blank=True)
 
     # É válido
     valido = models.BooleanField(default=False)
 
     # Usuário que validou
-    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data de validação
-    data_validacao = models.DateTimeField(null=True)
+    data_validacao = models.DateTimeField(null=True, blank=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -279,19 +279,19 @@ class PrimeiraConsultaSemDentes(models.Model):
                                     choices=choices.SIM_NAO_CHOICES,
                                     null=True)
     # Usuário que cadastrou
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data do Cadastro
-    data_cadastro = models.DateField(null=True)
+    data_cadastro = models.DateField(auto_now_add=True, null=True, blank=True)
 
     # É válido
     valido = models.BooleanField(default=False)
 
     # Usuário que validou
-    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data de validação
-    data_validacao = models.DateTimeField(null=True)
+    data_validacao = models.DateTimeField(null=True, blank=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -327,19 +327,19 @@ class ExameClinicoSemDentes(models.Model):
         choices=choices.ANQUILOGLOSSIA_CHOICES, null=True)
 
     # Usuário que cadastrou
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data do Cadastro
-    data_cadastro = models.DateField(null=True)
+    data_cadastro = models.DateField(auto_now_add=True, null=True, blank=True)
 
     # É válido
     valido = models.BooleanField(default=False)
 
     # Usuário que validou
-    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data de validação
-    data_validacao = models.DateTimeField(null=True)
+    data_validacao = models.DateTimeField(null=True, blank=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -478,19 +478,19 @@ class ExameClinicoComDentes(models.Model):
         upload_to='ExameComDentes', blank=True, null=True)
 
     # Usuário que cadastrou
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data do Cadastro
-    data_cadastro = models.DateField(null=True)
+    data_cadastro = models.DateField(auto_now_add=True, null=True, blank=True)
 
     # É válido
     valido = models.BooleanField(default=False)
 
     # Usuário que validou
-    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data de validação
-    data_validacao = models.DateTimeField(null=True)
+    data_validacao = models.DateTimeField(null=True, blank=True)
 
     # Crianca
     crianca = models.ForeignKey(
@@ -697,19 +697,19 @@ class Retorno(models.Model):
         upload_to='ExameRetorno', blank=True, null=True)
 
     # Usuário que cadastrou
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='%(class)s_added_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data do Cadastro
-    data_cadastro = models.DateField(null=True)
+    data_cadastro = models.DateField(auto_now_add=True, null=True, blank=True)
 
     # É válido
     valido = models.BooleanField(default=False)
 
     # Usuário que validou
-    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True)
+    validado_por = models.ForeignKey(User, related_name='%(class)s_validated_by', on_delete=models.CASCADE, null=True, blank=True)
 
     # Data de validação
-    data_validacao = models.DateTimeField(null=True)
+    data_validacao = models.DateTimeField(null=True, blank=True)
 
     # Crianca
     crianca = models.ForeignKey(

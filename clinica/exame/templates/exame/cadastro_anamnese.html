@@ -28,22 +28,22 @@
         {{ hidden }}
       {% endfor %}
       
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-3">
-          <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
-          {{ form.user|add_class:'form-control'}}
-          {% for error in form.user.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
-          {{ form.data_cadastro|add_class:'form-control'}}
-          {% for error in form.data_cadastro.errors %}
-                    <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-      </div>
+      <!--<div class="form-group col-md-12">-->
+        <!--<div class="form-group col-md-3">-->
+          <!--<label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>-->
+          <!--{{ form.user|add_class:'form-control'|attr:'hidden'}}-->
+          <!--{% for error in form.user.errors %}-->
+                    <!--<span class="help-block">{{ error }}</span>-->
+           <!--{% endfor %}-->
+        <!--</div>-->
+        <!--<div class="form-group col-md-3">-->
+          <!--<label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>-->
+          <!--{{ form.data_cadastro|add_class:'form-control'|attr:'disabled'}}-->
+          <!--{% for error in form.data_cadastro.errors %}-->
+                    <!--<span class="help-block">{{ error }}</span>-->
+           <!--{% endfor %}-->
+        <!--</div>-->
+      <!--</div>-->
 
       <div class="form-group col-md-12">
          <h3 style="color: #fc8100">Histórico da Gravidez</h3>
@@ -133,7 +133,7 @@
       <div class="form-group col-md-12">
         <h3 style="color: #fc8100">Amamentação</h3>
         <div class="form-group col-md-4">
-          <label for="{{ form.tempo_amamentacao.id_for_label }}">Tempo de Amamentação</label>
+          <label for="{{ form.tempo_amamentacao.id_for_label }}">Tempo de Amamentação (em meses)</label>
           {{ form.tempo_amamentacao|add_class:'form-control'}}
           {% for error in form.tempo_amamentacao.errors %}
                     <span class="help-block">{{ error }}</span>

@@ -19,7 +19,7 @@ class Professor(models.Model):
 
     class Meta:
         permissions = (
-            ('pode_validar', 'Pode validar'),
+            ('pode_validar', 'Pode validar'), ('can_delete', 'Can Delete'),
         )
 
     def __str__(self):

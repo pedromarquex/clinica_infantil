@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .forms import CriancaForm
 from .models import Crianca
@@ -17,7 +18,6 @@ def cadastrar(request):
 
         if crianca.is_valid():
             crianca = crianca.save(commit=False)
-
             crianca.user = request.user
             crianca.save()
 
@@ -34,15 +34,16 @@ def cadastrar(request):
 
 @login_required
 def listar_criancas(request):
-    is_professor = None
-    for grupo in request.user.groups.all():
-        if grupo.name == "Aluno":
-            is_professor = False
-        else:
-            is_professor = True
+    is_professor = False
+    # for grupo in request.user.groups.all():
+    #     if grupo.name == "Aluno":
+    #         is_professor = False
+    #     else:
+    #         is_professor = True
 
     try:
         user = Professor.objects.get(user=request.user)
+        is_professor = True
     except Exception:
         user = Aluno.objects.get(user=request.user)
 
@@ -59,6 +60,7 @@ def listar_criancas(request):
 def editar_crianca(request, pk):
     c = Crianca.objects.get(pk=pk)
     mensagem_sucesso = None
+    user_cadastrou = User.objects.get(username=c.user)
 
     form = CriancaForm(instance=c)
 
@@ -82,7 +84,8 @@ def editar_crianca(request, pk):
                            'mensagem_sucesso': mensagem_sucesso})
 
     return render(request, 'crianca/editar_crianca.html',
-                  {'form': form, 'user': user, 'crianca': c})
+                  {'form': form, 'user': user, 'crianca': c,
+                   'user_cadastrou':user_cadastrou})
 
 
 @login_required

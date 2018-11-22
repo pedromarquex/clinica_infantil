@@ -216,7 +216,7 @@
                       
                         <div class="form-group col-md-4">
                           <label for="{{ form_singup.data_nascimento.id_for_label }}">Nascimento</label>
-                            {{ form_singup.data_nascimento|add_class:'form-control'}}
+                            {{ form_singup.data_nascimento|add_class:'form-control'|attr:'onkeypress:barraData(this)' }}
                             {% for error in form_singup.data_nascimento.errors %}
                               <span class="help-block">{{ error }}</span>
                             {% endfor %}

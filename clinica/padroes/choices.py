@@ -62,8 +62,8 @@ PESO_AO_NASCER_CHOICES = (
 VISITAS_PRENATAL_CHOICES = (
     ('0', 'Nao fez/Nao Lembra'),
     ('1 a 3', 'De 1 a 3 visitas'),
-    ('3 a 6', 'De 3 a 6 visitas'),
-    ('6 a 9', 'De 6 a 9 visitas'),
+    ('4 a 6', 'De 4 a 6 visitas'),
+    ('7 a 9', 'De 7 a 9 visitas'),
     ('Mais de 9', 'Mais de 9 visitas')
 )
 

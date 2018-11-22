@@ -22,6 +22,8 @@ urlpatterns = [
          exame_views.editar_anamnese, name="editar_anamnese"),
     path('todas/<int:pk>/exames/anamnese/<int:epk>/deletar',
          exame_views.deletar_anamnese, name="deletar_anamnese"),
+    path('todas/<int:pk>/exames/anamnese/<int:epk>/validar',
+         exame_views.validar_anamnese, name="validar_anamnese"),
 
     # Exames Clínicos
     path('todas/<int:pk>/exames/clinico_com_dentes/todos',
@@ -36,6 +38,8 @@ urlpatterns = [
     path('todas/<int:pk>/exames/clinico_com_dentes/<int:epk>/deletar',
          exame_views.deletar_clinico_com_dentes,
          name="deletar_clinico_com_dentes"),
+    path('todas/<int:pk>/exames/clinico_com_dentes/<int:epk>/validar',
+         exame_views.validar_clinico_com_dentes, name="validar_clinico_com_dentes"),
 
     path('todas/<int:pk>/exames/clinico_sem_dentes/todos',
          exame_views.listar_clinico_sem_dentes,
@@ -49,6 +53,8 @@ urlpatterns = [
     path('todas/<int:pk>/exames/clinico_sem_dentes/<int:epk>/deletar',
          exame_views.deletar_clinico_sem_dentes,
          name="deletar_clinico_sem_dentes"),
+    path('todas/<int:pk>/exames/clinico_sem_dentes/<int:epk>/validar',
+         exame_views.validar_clinico_sem_dentes, name="validar_clinico_sem_dentes"),
 
     # Primeiras Consultas
     path('todas/<int:pk>/exames/consulta_com_dentes/todos',
@@ -63,6 +69,8 @@ urlpatterns = [
     path('todas/<int:pk>/exames/consulta_com_dentes/<int:epk>/deletar',
          exame_views.deletar_consulta_com_dentes,
          name="deletar_consulta_com_dentes"),
+    path('todas/<int:pk>/exames/consulta_com_dentes/<int:epk>/validar',
+         exame_views.validar_consulta_com_dentes, name="validar_consulta_com_dentes"),
 
     path('todas/<int:pk>/exames/consulta_sem_dentes/todos',
          exame_views.listar_consulta_sem_dentes,
@@ -76,6 +84,8 @@ urlpatterns = [
     path('todas/<int:pk>/exames/consulta_sem_dentes/<int:epk>/deletar',
          exame_views.deletar_consulta_sem_dentes,
          name="deletar_consulta_sem_dentes"),
+    path('todas/<int:pk>/exames/consulta_sem_dentes/<int:epk>/validar',
+         exame_views.validar_consulta_sem_dentes, name="validar_consulta_sem_dentes"),
 
     # Retorno
     path('todas/<int:pk>/exames/retorno/todos',
@@ -86,4 +96,6 @@ urlpatterns = [
          exame_views.editar_retorno, name="editar_retorno"),
     path('todas/<int:pk>/exames/retorno/<int:epk>/deletar',
          exame_views.deletar_retorno, name="deletar_retorno"),
+    path('todas/<int:pk>/exames/retorno/<int:epk>/validar',
+         exame_views.validar_retorno, name="validar_retorno"),
 ]

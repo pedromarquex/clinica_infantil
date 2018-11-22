@@ -3,300 +3,330 @@
 {% load staticfiles %}
 
 {% block titulo %}
-  PPGB | Editar Criança
+PPGB | Editar Criança
 {% endblock %}
 
 {% block content %}
 
 <div id="#content">
 
-  <ol class="breadcrumb">
-      <li><a href="{% url 'core:sistema' %}">Início</a></li>
-      <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
-      <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">{{crianca.nome}}</a></li>
-  </ol>    
-  <h1 id="titulo-pagina">{{ crianca.nome }}</h1>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'core:sistema' %}">Início</a></li>
+        <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
+        <li><a href="{% url 'crianca:listar_exames' pk=crianca.pk %}">{{crianca.nome}}</a></li>
+    </ol>
+    <h1 id="titulo-pagina">{{ crianca.nome }}</h1>
 
-  {% if mensagem_sucesso %}
+    {% if mensagem_sucesso %}
     <div class="alert alert-success alert-dismissible" role="alert">
         {{ mensagem_sucesso }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
     </div>
-  {% endif %}
+    {% endif %}
 
-  <div style="margin-top: 20px;">
-    <form action="{% url 'crianca:editar' pk=crianca.pk %}" method="post">
-      {% csrf_token %}
-      
-      {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-      {% endfor %}
-        
-      <div class="form-group col-md-12">
-        <div class="form-group col-md-3">
-          <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
-          {{ form.user|add_class:'form-control'}}
-          {% for error in form.user.errors %}
-              <span class="help-block">{{ error }}</span>
-           {% endfor %}
-        </div>
-        <div class="form-group col-md-3">
-          <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
-          {{ form.data_cadastro|add_class:'form-control'}}
-          {% for error in form.data_cadastro.errors %}
-              <span class="help-block">{{ error }}</span>
-          {% endfor %}
-        </div>
-      </div>
-            
-      <div class="form-row">
-        <h3 style="color: #fc8100">Dados Básicos da Criança</h3>
-            <div class="form-group col-md-6">
-                <label for="{{ form.nome.id_for_label }}">Nome</label>
-                {{ form.nome|add_class:'form-control'}}
-                {% for error in form.nome.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-2">
-                <label for="{{ form.naturalidade.id_for_label }}">Naturalidade</label>
-                {{ form.naturalidade|add_class:'form-control'}}
-                {% for error in form.naturalidade.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-2">
-                <label for="{{ form.sexo.id_for_label }}">Sexo *</label>
-                {{ form.sexo|add_class:'form-control'}}
-                {% for error in form.sexo.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-2">
-                <label for="{{ form.data_nascimento.id_for_label }}">Data de Nascimento</label>
-                {{ form.data_nascimento|add_class:'form-control'}}
-                {% for error in form.data_nascimento.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
-      <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="{{ form.mora_pais.id_for_label }}">Mora com os Pais?</label>
-                {{ form.mora_pais|add_class:'form-control'}}
-                {% for error in form.mora_pais.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-4">
-                <label for="{{ form.responsavel.id_for_label }}">Quem cuida da Criança</label>
-                {{ form.responsavel|add_class:'form-control'}}
-                {% for error in form.responsavel.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            
-            <div class="form-group col-md-4">
-                <label for="{{ form.peso_ao_nascer.id_for_label }}">Peso ao Nascer</label>
-                {{ form.peso_ao_nascer|add_class:'form-control'}}
-                {% for error in form.peso_ao_nascer.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
+    <div style="margin-top: 20px;">
+        <form action="{% url 'crianca:editar' pk=crianca.pk %}" method="post">
+            {% csrf_token %}
 
-      <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="{{ form.nasceu_tempo.id_for_label }}">Nasceu com 9 meses?</label>
-                {{ form.nasceu_tempo|add_class:'form-control'}}
-                {% for error in form.nasceu_tempo.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.nasceu_tempo_meses.id_for_label }}">Quantos meses?</label>
-                {{ form.nasceu_tempo_meses|add_class:'form-control'}}
-                {% for error in form.nasceu_tempo_meses.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.nasceu_tempo_semanas.id_for_label }}">Quantas semanas?</label>
-                {{ form.nasceu_tempo_semanas|add_class:'form-control'}}
-                {% for error in form.nasceu_tempo_semanas.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.visita_prenatal.id_for_label }}">Visitas no Pré-Natal</label>
-                {{ form.visita_prenatal|add_class:'form-control'}}
-                {% for error in form.visita_prenatal.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
+            {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
 
-      <div class="form-row">
-        <h3 style="color: #fc8100">Dados dos Pais</h3>
-            <div class="form-group col-md-6">
-                <label for="{{ form.nome_mae.id_for_label }}">Nome da Mãe</label>
-                {{ form.nome_mae|add_class:'form-control'}}
-                {% for error in form.nome_mae.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-6">
-                <label for="{{ form.nome_pai.id_for_label }}">Nome do Pai</label>
-                {{ form.nome_pai|add_class:'form-control'}}
-                {% for error in form.nome_pai.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
-      <div class="form-row">
-            <div class="form-group col-md-3">
-                <label for="{{ form.escolaridade_mae.id_for_label }}">Escolaridade da Mãe</label>
-                {{ form.escolaridade_mae|add_class:'form-control'}}
-                {% for error in form.escolaridade_mae.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.profissao_mae.id_for_label }}">Profissão da Mãe</label>
-                {{ form.profissao_mae|add_class:'form-control'}}
-                {% for error in form.profissao_mae.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.escolaridade_pai.id_for_label }}">Escolaridade do Pai</label>
-                {{ form.escolaridade_pai|add_class:'form-control'}}
-                {% for error in form.escolaridade_pai.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.profissao_pai.id_for_label }}">Profissão do Pai</label>
-                {{ form.profissao_pai|add_class:'form-control'}}
-                {% for error in form.profissao_pai.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
 
-      <div class="form-row">
-        <h3 style="color: #fc8100">Renda Familiar</h3>
-            <div class="form-group col-md-4">
-                <label for="{{ form.renda_familia.id_for_label }}">Renda da Família</label>
-                {{ form.renda_familia|add_class:'form-control'}}
-                {% for error in form.renda_familia.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
+            <div class="form-group col-md-12">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
+                    <select name="user" class="form-control" id="id_user" disabled>
+                        <option value="">---------</option>
+                        <option value="1" selected="">{{ crianca.user }}</option>
+                    </select>
+                    {% for error in form.user.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
+                    <input type="text" class="form-control" value="{{ crianca.data_cadastro }}" disabled>
+                    {% for error in form.data_cadastro.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="form-group col-md-4">
-                <label for="{{ form.numero_pessoas_casa.id_for_label }}">Número de Pessoas na Casa</label>
-                {{ form.numero_pessoas_casa|add_class:'form-control'}}
-                {% for error in form.numero_pessoas_casa.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-4">
-                <label for="{{ form.renda_percapita.id_for_label }}">Renda Per Capita</label>
-                {{ form.renda_percapita|add_class:'form-control'}}
-                {% for error in form.renda_percapita.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
 
-      <div class="form-row">
-        <h3 style="color: #fc8100">Contato</h3>
-            
-            <div class="form-group col-md-3">
-                <label for="{{ form.email.id_for_label }}">Email</label>
-                {{ form.email|add_class:'form-control'}}
-                {% for error in form.email.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
+            <!--campos hidden-->
+            <div id="ed_hidden" class="form-group col-md-12">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
+                    {{ form.user|add_class:'form-control'}}
+                    {% for error in form.user.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
+                    {{ form.data_cadastro|add_class:'form-control'}}
+                    {% for error in form.data_cadastro.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.facebook.id_for_label }}">Facebook</label>
-                {{ form.facebook|add_class:'form-control'}}
-                {% for error in form.facebook.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.instagram.id_for_label }}">Instagram</label>
-                {{ form.instagram|add_class:'form-control'}}
-                {% for error in form.instagram.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.telefone.id_for_label }}">Telefone</label>
-                {{ form.telefone|add_class:'form-control'}}
-                {% for error in form.telefone.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
 
-      <div class="form-row">
-        <h3 style="color: #fc8100">Endereço</h3>
-            <div class="form-group col-md-3">
-                <label for="{{ form.estado.id_for_label }}">Estado</label>
-                {{ form.estado|add_class:'form-control'}}
-                {% for error in form.estado.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
+            <div class="form-row">
+                <h3 style="color: #fc8100">Dados Básicos da Criança</h3>
+                <div class="form-group col-md-6">
+                    <label for="{{ form.nome.id_for_label }}">Nome</label>
+                    {{ form.nome|add_class:'form-control'}}
+                    {% for error in form.nome.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="{{ form.naturalidade.id_for_label }}">Naturalidade</label>
+                    {{ form.naturalidade|add_class:'form-control'}}
+                    {% for error in form.naturalidade.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="{{ form.sexo.id_for_label }}">Sexo *</label>
+                    {{ form.sexo|add_class:'form-control'}}
+                    {% for error in form.sexo.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="{{ form.data_nascimento.id_for_label }}">Data de Nascimento</label>
+                    {{ form.data_nascimento|add_class:'form-control'}}
+                    {% for error in form.data_nascimento.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.cidade.id_for_label }}">Cidade</label>
-                {{ form.cidade|add_class:'form-control'}}
-                {% for error in form.cidade.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.zona.id_for_label }}">Zona</label>
-                {{ form.zona|add_class:'form-control'}}
-                {% for error in form.zona.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-3">
-                <label for="{{ form.cep.id_for_label }}">CEP</label>
-                {{ form.cep|add_class:'form-control'}}
-                {% for error in form.cep.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
-      <div class="form-row">
-            <div class="form-group col-md-8">
-                <label for="{{ form.rua.id_for_label }}">Rua</label>
-                {{ form.rua|add_class:'form-control'}}
-                {% for error in form.rua.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-            <div class="form-group col-md-4">
-                <label for="{{ form.bairro.id_for_label }}">Bairro</label>
-                {{ form.bairro|add_class:'form-control'}}
-                {% for error in form.bairro.errors %}
-                  <span class="help-block">{{ error }}</span>
-                {% endfor %}
-            </div>
-      </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.mora_pais.id_for_label }}">Mora com os Pais?</label>
+                    {{ form.mora_pais|add_class:'form-control'}}
+                    {% for error in form.mora_pais.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.responsavel.id_for_label }}">Quem cuida da Criança</label>
+                    {{ form.responsavel|add_class:'form-control'}}
+                    {% for error in form.responsavel.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
 
-      <div class="form-group" style="text-align: center;">
-        <button type="submit" class="btn btn-success">
-          <span class="glyphicon glyphicon-ok"></span> Salvar
-        </button>
-      </div>
-    </form>
-  </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.peso_ao_nascer.id_for_label }}">Peso ao Nascer</label>
+                    {{ form.peso_ao_nascer|add_class:'form-control'}}
+                    {% for error in form.peso_ao_nascer.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.possui_agua_encanada.id_for_label }}">Possui água encanada</label>
+                    {{ form.possui_agua_encanada|add_class:'form-control'}}
+                    {% for error in form.possui_agua_encanada.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.nasceu_tempo.id_for_label }}">Nasceu com 9 meses?</label>
+                    {{ form.nasceu_tempo|add_class:'form-control'}}
+                    {% for error in form.nasceu_tempo.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.nasceu_tempo_meses.id_for_label }}">Quantos meses?</label>
+                    {{ form.nasceu_tempo_meses|add_class:'form-control'}}
+                    {% for error in form.nasceu_tempo_meses.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.nasceu_tempo_semanas.id_for_label }}">Quantas semanas?</label>
+                    {{ form.nasceu_tempo_semanas|add_class:'form-control'}}
+                    {% for error in form.nasceu_tempo_semanas.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.visita_prenatal.id_for_label }}">Visitas no Pré-Natal</label>
+                    {{ form.visita_prenatal|add_class:'form-control'}}
+                    {% for error in form.visita_prenatal.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <h3 style="color: #fc8100">Dados dos Pais</h3>
+                <div class="form-group col-md-6">
+                    <label for="{{ form.nome_mae.id_for_label }}">Nome da Mãe</label>
+                    {{ form.nome_mae|add_class:'form-control'}}
+                    {% for error in form.nome_mae.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="{{ form.nome_pai.id_for_label }}">Nome do Pai</label>
+                    {{ form.nome_pai|add_class:'form-control'}}
+                    {% for error in form.nome_pai.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="{{ form.escolaridade_mae.id_for_label }}">Escolaridade da Mãe</label>
+                    {{ form.escolaridade_mae|add_class:'form-control'}}
+                    {% for error in form.escolaridade_mae.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.profissao_mae.id_for_label }}">Profissão da Mãe</label>
+                    {{ form.profissao_mae|add_class:'form-control'}}
+                    {% for error in form.profissao_mae.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.escolaridade_pai.id_for_label }}">Escolaridade do Pai</label>
+                    {{ form.escolaridade_pai|add_class:'form-control'}}
+                    {% for error in form.escolaridade_pai.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.profissao_pai.id_for_label }}">Profissão do Pai</label>
+                    {{ form.profissao_pai|add_class:'form-control'}}
+                    {% for error in form.profissao_pai.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <h3 style="color: #fc8100">Renda Familiar</h3>
+                <div class="form-group col-md-4">
+                    <label for="{{ form.renda_familia.id_for_label }}">Renda da Família</label>
+                    {{ form.renda_familia|add_class:'form-control'}}
+                    {% for error in form.renda_familia.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="{{ form.numero_pessoas_casa.id_for_label }}">Número de Pessoas na Casa</label>
+                    {{ form.numero_pessoas_casa|add_class:'form-control'}}
+                    {% for error in form.numero_pessoas_casa.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="{{ form.renda_percapita.id_for_label }}">Renda Per Capita</label>
+                    {{ form.renda_percapita|add_class:'form-control'}}
+                    {% for error in form.renda_percapita.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <h3 style="color: #fc8100">Contato</h3>
+
+                <div class="form-group col-md-3">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email|add_class:'form-control'}}
+                    {% for error in form.email.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.facebook.id_for_label }}">Facebook</label>
+                    {{ form.facebook|add_class:'form-control'}}
+                    {% for error in form.facebook.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.instagram.id_for_label }}">Instagram</label>
+                    {{ form.instagram|add_class:'form-control'}}
+                    {% for error in form.instagram.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.telefone.id_for_label }}">Telefone</label>
+                    {{ form.telefone|add_class:'form-control'}}
+                    {% for error in form.telefone.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <h3 style="color: #fc8100">Endereço</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.estado.id_for_label }}">Estado</label>
+                    {{ form.estado|add_class:'form-control'}}
+                    {% for error in form.estado.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.cidade.id_for_label }}">Cidade</label>
+                    {{ form.cidade|add_class:'form-control'}}
+                    {% for error in form.cidade.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.zona.id_for_label }}">Zona</label>
+                    {{ form.zona|add_class:'form-control'}}
+                    {% for error in form.zona.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.cep.id_for_label }}">CEP</label>
+                    {{ form.cep|add_class:'form-control'}}
+                    {% for error in form.cep.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="{{ form.rua.id_for_label }}">Rua</label>
+                    {{ form.rua|add_class:'form-control'}}
+                    {% for error in form.rua.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="{{ form.bairro.id_for_label }}">Bairro</label>
+                    {{ form.bairro|add_class:'form-control'}}
+                    {% for error in form.bairro.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: center;">
+                <button type="submit" class="btn btn-success">
+                    <span class="glyphicon glyphicon-ok"></span> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

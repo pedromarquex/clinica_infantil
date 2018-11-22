@@ -9,8 +9,8 @@
 }
 
 th {
-	background-color: #fc8100;
-	color: white;
+    background-color: #fc8100;
+    color: white;
 }
 
 td {
@@ -18,11 +18,11 @@ td {
 }
 
 #b-link {
-	background-color: #fc8100;
+    background-color: #fc8100;
 }
 
 #button-link {
-	color: white;
+    color: white;
 }
 
 #box-perfil {
@@ -32,7 +32,7 @@ td {
 }
 
 #text-perfil {
-    text-align: center; 
+    text-align: center;
     color: #fc8100;
 }
 
@@ -53,4 +53,8 @@ td {
 
 #dentes {
     text-align: center;
+}
+
+#ed_hidden{
+    display: none;
 }

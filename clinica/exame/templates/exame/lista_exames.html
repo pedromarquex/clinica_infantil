@@ -3,41 +3,46 @@
 {% load staticfiles %}
 
 {% block titulo %}
-	PPGB | Exames
+PPGB | Exames
 {% endblock %}
 
 {% block content %}
 
 <div id="#content">
-	<ol class="breadcrumb">
-  	  <li><a href="{% url 'core:sistema' %}">Início</a></li>
-      <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
-      <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
-      <li class="active">Exames</li>
-	</ol>    
-	<h1 id="titulo-pagina">
-		{{crianca.nome}} 
-	</h1>
-	
-	<div style="margin-top: 30px;" class="list-group">
-  		<a id="list-group" href="" class="list-group-item active"><b>Exames</b></a>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'core:sistema' %}">Início</a></li>
+        <li><a href="{% url 'crianca:listar_criancas' %}">Crianças</a></li>
+        <li><a href="{% url 'crianca:editar' pk=crianca.pk %}">{{crianca.nome}}</a></li>
+        <li class="active">Exames</li>
+    </ol>
+    <h1 id="titulo-pagina">
+        {{crianca.nome}}
+    </h1>
 
-      <a href="{% url 'crianca:listar_retorno' pk=crianca.pk %}" class="list-group-item"> Retorno <span class="badge">{{cont_retorno}}</span></a>
-  		<a href="{% url 'crianca:listar_anamnese' pk=crianca.pk %}" class="list-group-item">Anamnese <span class="badge">{{cont_a}}</span></a>
+    <div style="margin-top: 30px;" class="list-group">
+        <a id="list-group" href="" class="list-group-item active"><b>Exames</b></a>
 
-  		<a id="list-group1" href="" class="list-group-item active">Sem Dentes</a>
+        <a href="{% url 'crianca:listar_retorno' pk=crianca.pk %}" class="list-group-item"> Retorno <span class="badge">{{cont_retorno}}</span></a>
+        <a href="{% url 'crianca:listar_anamnese' pk=crianca.pk %}" class="list-group-item">Anamnese <span
+                class="badge">{{cont_a}}</span></a>
 
-  		<a href="{% url 'crianca:listar_consulta_sem_dentes' pk=crianca.pk %}" class="list-group-item">Primeira Consulta <span class="badge">{{cont_pcsd}}</span></a>
+        <a id="list-group1" href="" class="list-group-item active">Sem Dentes</a>
 
-  		<a href="{% url 'crianca:listar_clinico_sem_dentes' pk=crianca.pk %}" class="list-group-item">Exame Clínico <span class="badge">{{cont_ecsd}}</span></a>
+        <a href="{% url 'crianca:listar_consulta_sem_dentes' pk=crianca.pk %}" class="list-group-item">Primeira Consulta
+            <span class="badge">{{cont_pcsd}}</span></a>
 
-  		<a id="list-group1" href="" class="list-group-item active">Com Dentes</a>
+        <a href="{% url 'crianca:listar_clinico_sem_dentes' pk=crianca.pk %}" class="list-group-item">Exame Clínico
+            <span class="badge">{{cont_ecsd}}</span></a>
 
-  		<a href="{% url 'crianca:listar_consulta_com_dentes' pk=crianca.pk %}" class="list-group-item">Primeira Consulta <span class="badge">{{cont_pccd}}</span></a>
+        <a id="list-group1" href="" class="list-group-item active">Com Dentes</a>
 
-  		<a href="{% url 'crianca:listar_clinico_com_dentes' pk=crianca.pk %}" class="list-group-item">Exame Clínico <span class="badge">{{cont_eccd}}</span></a>
+        <a href="{% url 'crianca:listar_consulta_com_dentes' pk=crianca.pk %}" class="list-group-item">Primeira Consulta
+            <span class="badge">{{cont_pccd}}</span></a>
 
-	</div>
+        <a href="{% url 'crianca:listar_clinico_com_dentes' pk=crianca.pk %}" class="list-group-item">Exame Clínico
+            <span class="badge">{{cont_eccd}}</span></a>
+
+    </div>
 </div>
 
 {% endblock %}

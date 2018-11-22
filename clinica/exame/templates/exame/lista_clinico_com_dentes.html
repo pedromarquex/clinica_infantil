@@ -64,6 +64,10 @@ PPGB | Exame Clínico Com Dentes
                 <th>Validação</th>
                 <th></th>
                 <th></th>
+                {% if is_professor and not exame.valido %}
+                <th></th>
+                {% else %}
+                {% endif %}
             </tr>
             </thead>
             <tbody id="myTable">
@@ -87,6 +91,19 @@ PPGB | Exame Clínico Com Dentes
                         <i class="material-icons" title="Deletar" style="font-size:20px;color:darkred;">delete</i>
                     </a>
                 </td>
+                {% if is_professor and not exame.valido %}
+                <td style="text-align:center;">
+                    <a href="{% url 'crianca:validar_clinico_com_dentes' pk=crianca.pk epk=exame.pk %}">
+                        <i class="material-icons" title="Validar Anamnese"
+                           style="font-size:20px;color:darkgreen">check_circle</i>
+                    </a>
+                </td>
+                {% elif is_professor and exame.valido %}
+                <td style="text-align:center;">
+                    <i class="material-icons" title="Exame válido">done</i>
+                </td>
+                {% else %}
+                {% endif %}
             </tr>
             {% endfor %}
             </tbody>

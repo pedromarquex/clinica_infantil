@@ -31,6 +31,36 @@ PPGB | Editar Retorno
             <div class="form-group col-md-12">
                 <div class="form-group col-md-4">
                     <label for="{{ form.crianca.id_for_label }}">Criança</label>
+                    <select name="crianca" class="form-control" id="id_crianca" disabled>
+                        <option value="1" selected="">{{ crianca }}</option>
+                    </select>
+                    {% for error in form.crianca.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.user.id_for_label }}">Usuário que Cadastrou</label>
+                    <select name="user" class="form-control" id="id_user" disabled>
+                        <option value="">---------</option>
+                        <option value="1" selected="">{{ exame.user }}</option>
+                    </select>
+                    {% for error in form.user.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
+                    <input type="text" class="form-control" value="{{ exame.data_cadastro }}" disabled>
+                    {% for error in filter.form.data_cadastro.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!--campos hidden-->
+            <div id="ed_hidden" class="form-group col-md-12">
+                <div class="form-group col-md-4">
+                    <label for="{{ form.crianca.id_for_label }}">Criança</label>
                     {{ form.crianca|add_class:'form-control'}}
                     {% for error in form.crianca.errors %}
                     <span class="help-block">{{ error }}</span>
@@ -43,13 +73,13 @@ PPGB | Editar Retorno
                     <span class="help-block">{{ error }}</span>
                     {% endfor %}
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>
-                    {{ form.data_cadastro|add_class:'form-control'}}
-                    {% for error in form.data_cadastro.errors %}
-                    <span class="help-block">{{ error }}</span>
-                    {% endfor %}
-                </div>
+                <!--<div class="form-group col-md-3">-->
+                <!--<label for="{{ form.data_cadastro.id_for_label }}">Data do Cadastro</label>-->
+                <!--{{ form.data_cadastro|add_class:'form-control'}}-->
+                <!--{% for error in filter.form.data_cadastro.errors %}-->
+                <!--<span class="help-block">{{ error }}</span>-->
+                <!--{% endfor %}-->
+                <!--</div>-->
             </div>
 
             <div class="form-group col-md-12">
@@ -598,24 +628,17 @@ PPGB | Editar Retorno
             </div>
 
 
-            <!--condição para validar-->
-            {% if perms.professor.pode_validar %}
-            <div class="form-group col-md-12">
+            <!--Se estiver validado, mostrará informações sobre a validação-->
+            {% if exame.valido %}
+            <!--campos hidden-->
+            <div id="ed_hidden" class="form-group col-md-12">
                 <h3 style="color: #fc8100">Validação</h3>
                 <div class="form-group col-md-3">
-                    <label for="{{ form.valido.id_for_label }}">Clique para validar o exame</label>
-                    {{ form.valido|add_class:'form-control' }}
-                    {% for error in form.valido.errors %}
-                    <span class="help-block">{{ error }}</span>
-                    {% endfor %}
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="{{ form.valido.id_for_label }}">Validado por</label>
+                    <label for="{{ form.validado_por.id_for_label }}">Usuário que validou</label>
                     {{ form.validado_por|add_class:'form-control' }}
                     {% for error in form.validado_por.errors %}
                     <span class="help-block">{{ error }}</span>
                     {% endfor %}
-
                 </div>
                 <div class="form-group col-md-3">
                     <label for="{{ form.data_validacao.id_for_label }}">Data de validação</label>
@@ -624,33 +647,43 @@ PPGB | Editar Retorno
                     <span class="help-block">{{ error }}</span>
                     {% endfor %}
                 </div>
-                {% else %}
-
-                <div class="form-group col-md-12">
-                    <h3 style="color: #fc8100">Validação</h3>
-                    <div class="form-group col-md-3">
-                        <label for="{{ form.validado_por.id_for_label }}">Usuário que validou</label>
-                        {{ form.validado_por|add_class:'form-control'|attr:'disabled' }}
-                        {% for error in form.validado_por.errors %}
-                        <span class="help-block">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="{{ form.data_validacao.id_for_label }}">Data de validação</label>
-                        {{ form.data_validacao|add_class:'form-control'|attr:'disabled' }}
-                        {% for error in form.data_validacao.errors %}
-                        <span class="help-block">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                {% endif %}
             </div>
+
+            <!--campos para visualização, mas disabled-->
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Validação</h3>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.user.id_for_label }}">Usuário que validou</label>
+                    <select name="user" class="form-control" id="id_user" disabled>
+                        <option value="">---------</option>
+                        <option value="1" selected="">{{ exame.validado_por }}</option>
+                    </select>
+                    {% for error in form.user.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="{{ form.data_cadastro.id_for_label }}">Data da validação</label>
+                    <input type="text" class="form-control" value="{{ exame.data_validacao }}" disabled>
+                    {% for error in filter.form.data_cadastro.errors %}
+                    <span class="help-block">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <!--se o exame não estiver validado-->
+
+            <div class="form-group col-md-12">
+                <h3 style="color: #fc8100">Validação</h3>
+                <p>Aguardando validação</p>
+            </div>
+
+            {% endif %}
 
 
             <div class="form-group" style="text-align: center;">
                 <button type="submit" class="btn btn-success">
-                    <span class="glyphicon glyphicon-ok"></span> Cadastrar
+                    <span class="glyphicon glyphicon-ok"></span> Salvar
                 </button>
             </div>
         </form>
